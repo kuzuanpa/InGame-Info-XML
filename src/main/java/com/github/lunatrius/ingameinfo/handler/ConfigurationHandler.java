@@ -70,7 +70,6 @@ public class ConfigurationHandler {
 
         propScale = configuration.get(Names.Config.Category.GENERAL, Names.Config.SCALE, SCALE_DEFAULT, Names.Config.SCALE_DESC, 5, 20);
         propScale.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SCALE);
-        //propScale.setValidValues(new String[] { "0.50", "0.65","0.75", "0.85", "1.00", "1.25", "1.50", "2.00" });
         scale = (float) propScale.getDouble(SCALE_DEFAULT * 10);
 
         propFileInterval = configuration.get(Names.Config.Category.GENERAL, Names.Config.FILE_INTERVAL, FILE_INTERVAL_DEFAULT, Names.Config.FILE_INTERVAL_DESC, 1, 60);
