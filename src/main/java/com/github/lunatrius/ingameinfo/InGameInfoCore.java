@@ -90,8 +90,8 @@ public class InGameInfoCore {
 
     public void onTickClient() {
         ScaledResolution scaledResolution = new ScaledResolution(this.minecraft, this.minecraft.displayWidth, this.minecraft.displayHeight);
-        int scaledWidth = (int) (scaledResolution.getScaledWidth() / ConfigurationHandler.scale);
-        int scaledHeight = (int) (scaledResolution.getScaledHeight() / ConfigurationHandler.scale);
+        int scaledWidth = (int) (scaledResolution.getScaledWidth() / (ConfigurationHandler.scale/10));
+        int scaledHeight = (int) (scaledResolution.getScaledHeight() / (ConfigurationHandler.scale/10));
 
         World world = this.minecraft.theWorld;
         if (world == null) {
@@ -176,13 +176,13 @@ public class InGameInfoCore {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glScalef(ConfigurationHandler.scale, ConfigurationHandler.scale, ConfigurationHandler.scale);
+        GL11.glScalef(ConfigurationHandler.scale/10, ConfigurationHandler.scale/10, ConfigurationHandler.scale/10);
 
         for (Info info : this.info) {
             info.draw();
         }
 
-        GL11.glScalef(1.0f / ConfigurationHandler.scale, 1.0f / ConfigurationHandler.scale, 1.0f / ConfigurationHandler.scale);
+        GL11.glScalef(1.0f / (ConfigurationHandler.scale/10), 1.0f / ConfigurationHandler.scale, 1.0f / ConfigurationHandler.scale);
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
