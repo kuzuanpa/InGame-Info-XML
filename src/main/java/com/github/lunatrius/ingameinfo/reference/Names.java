@@ -52,7 +52,7 @@ public final class Names {
         public static final String SHOW_IN_CHAT_DESC = "Display the overlay in chat.";
         public static final String SHOW_ON_PLAYER_LIST = "showOnPlayerList";
         public static final String SHOW_ON_PLAYER_LIST_DESC = "Display the overlay on the player list.";
-        public static final String SCALE = "scale";
+        public static final String SCALE = "Scale";
         public static final String SCALE_DESC = "The overlay will be scaled by this amount.";
         public static final String FILE_INTERVAL = "fileInterval";
         public static final String FILE_INTERVAL_DESC = "The interval between file reads for the 'file' tag (in seconds).";
