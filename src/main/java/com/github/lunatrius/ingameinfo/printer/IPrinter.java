@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface IPrinter {
-    boolean print(File file, Map<Alignment, List<List<Value>>> format);
+    public boolean print(File file, Map<Alignment, List<List<Value>>> format);
 }

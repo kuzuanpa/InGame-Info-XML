@@ -59,7 +59,9 @@ public class Ticker {
                     return true;
                 }
 
-                return ConfigurationHandler.showInChat && this.client.currentScreen instanceof GuiChat;
+                if (ConfigurationHandler.showInChat && this.client.currentScreen instanceof GuiChat) {
+                    return true;
+                }
             }
         }
 

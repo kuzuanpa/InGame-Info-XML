@@ -15,6 +15,7 @@ public class InfoIcon extends Info {
     private final Vector2f xy1 = new Vector2f();
     private final Vector2f uv0 = new Vector2f();
     private final Vector2f uv1 = new Vector2f();
+    private final double zLevel = 300;
     private int displayWidth;
     private int displayHeight;
 
@@ -51,11 +52,10 @@ public class InfoIcon extends Info {
 
             Tessellator tess = Tessellator.instance;
             tess.startDrawingQuads();
-            double zLevel = 300;
-            tess.addVertexWithUV(this.xy0.x, this.xy1.y, zLevel, this.uv0.x, this.uv1.y);
-            tess.addVertexWithUV(this.xy1.x, this.xy1.y, zLevel, this.uv1.x, this.uv1.y);
-            tess.addVertexWithUV(this.xy1.x, this.xy0.y, zLevel, this.uv1.x, this.uv0.y);
-            tess.addVertexWithUV(this.xy0.x, this.xy0.y, zLevel, this.uv0.x, this.uv0.y);
+            tess.addVertexWithUV(this.xy0.x, this.xy1.y, this.zLevel, this.uv0.x, this.uv1.y);
+            tess.addVertexWithUV(this.xy1.x, this.xy1.y, this.zLevel, this.uv1.x, this.uv1.y);
+            tess.addVertexWithUV(this.xy1.x, this.xy0.y, this.zLevel, this.uv1.x, this.uv0.y);
+            tess.addVertexWithUV(this.xy0.x, this.xy0.y, this.zLevel, this.uv0.x, this.uv0.y);
             tess.draw();
 
             GL11.glTranslatef(-getX(), -getY(), 0);

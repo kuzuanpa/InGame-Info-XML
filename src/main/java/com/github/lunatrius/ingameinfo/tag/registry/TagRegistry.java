@@ -11,7 +11,7 @@ import java.util.Map;
 public class TagRegistry {
     public static final TagRegistry INSTANCE = new TagRegistry();
 
-    private final Map<String, Tag> stringTagMap = new HashMap<String, Tag>();
+    private Map<String, Tag> stringTagMap = new HashMap<String, Tag>();
 
     private void register(String name, Tag tag) {
         if (this.stringTagMap.containsKey(name)) {

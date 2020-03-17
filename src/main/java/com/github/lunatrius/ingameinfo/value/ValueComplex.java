@@ -168,7 +168,7 @@ public abstract class ValueComplex extends Value {
     public static class ValueFile extends ValueComplex {
         private static int ticks = 0;
 
-        private final Map<String, String> cache = new HashMap<String, String>();
+        private Map<String, String> cache = new HashMap<String, String>();
 
         @Override
         public boolean isValidSize() {

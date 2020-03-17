@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class Token {
-    public enum TokenType {
+    public static enum TokenType {
         EOF("$"),
         FUNC_HEAD("<"),
         FUNC_TAIL(">"),
@@ -18,7 +18,7 @@ public class Token {
         public final static EnumSet<TokenType> EXCEPTIONS = EnumSet.of(FUNC_TAIL, ARGS_HEAD, ARGS_SEPARATOR, ARGS_TAIL);
         private final Pattern pattern;
 
-        TokenType(String regex) {
+        private TokenType(String regex) {
             this.pattern = Pattern.compile("^" + regex);
         }
 

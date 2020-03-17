@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IParser {
-    boolean load(InputStream inputStream);
+    public boolean load(InputStream inputStream);
 
-    boolean parse(Map<Alignment, List<List<Value>>> format);
+    public boolean parse(Map<Alignment, List<List<Value>>> format);
 }

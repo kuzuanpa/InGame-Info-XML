@@ -13,11 +13,13 @@ public class GuiTagList extends GuiListExtended {
     public static final int OFFSET_X = 150;
     public static final int SCROLLBAR_WIDTH = 6;
 
+    private final Minecraft minecraft;
     private final Map<CategoryEntry, Set<TagEntry>> map;
     private IGuiListEntry[] entries;
 
     public GuiTagList(GuiTags guiTags, Minecraft minecraft) {
         super(minecraft, guiTags.width, guiTags.height, 18, guiTags.height - 30, 24);
+        this.minecraft = minecraft;
 
         this.map = new TreeMap<CategoryEntry, Set<TagEntry>>();
 
@@ -29,13 +31,13 @@ public class GuiTagList extends GuiListExtended {
 
             CategoryEntry categoryEntry = stringCategoryEntryMap.get(category);
             if (categoryEntry == null) {
-                categoryEntry = new CategoryEntry(minecraft.fontRenderer, category);
+                categoryEntry = new CategoryEntry(this.minecraft.fontRenderer, category);
                 stringCategoryEntryMap.put(category, categoryEntry);
                 this.map.put(categoryEntry, new TreeSet<TagEntry>());
             }
             Set<TagEntry> tagEntries = this.map.get(categoryEntry);
             if (tagEntries != null) {
-                tagEntries.add(new TagEntry(minecraft.fontRenderer, name, description));
+                tagEntries.add(new TagEntry(this.minecraft.fontRenderer, name, description));
             }
         }
 
@@ -83,7 +85,7 @@ public class GuiTagList extends GuiListExtended {
         return this.width / 2 + getListWidth() / 2 - SCROLLBAR_WIDTH;
     }
 
-    public abstract static class ListEntry implements IGuiListEntry, Comparable<ListEntry> {
+    public abstract class ListEntry implements IGuiListEntry, Comparable<ListEntry> {
         @Override
         public boolean mousePressed(int index, int x, int y, int mouseEvent, int relativeX, int relativeY) {
             return false;
@@ -101,7 +103,7 @@ public class GuiTagList extends GuiListExtended {
         }
     }
 
-    public static class CategoryEntry extends ListEntry {
+    public class CategoryEntry extends ListEntry {
         private final FontRenderer fontRenderer;
         private final String name;
 

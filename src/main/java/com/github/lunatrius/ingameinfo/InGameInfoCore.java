@@ -37,7 +37,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InGameInfoCore {
-    private static final Pattern PATTERN = Pattern.compile("\\{ICON\\|( *)}", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN = Pattern.compile("\\{ICON\\|( *)\\}", Pattern.CASE_INSENSITIVE);
     private static final Matcher MATCHER = PATTERN.matcher("");
     public static final InGameInfoCore INSTANCE = new InGameInfoCore();
 
@@ -133,7 +133,7 @@ public class InGameInfoCore {
                 this.profiler.endSection();
 
                 if (!str.isEmpty()) {
-                    String processed = str.replaceAll("\\{ICON\\|( *)}", "$1");
+                    String processed = str.replaceAll("\\{ICON\\|( *)\\}", "$1");
 
                     x = alignment.getX(scaledWidth, fontRenderer.getStringWidth(processed));
                     InfoText text = new InfoText(fontRenderer, processed, x, 0);
