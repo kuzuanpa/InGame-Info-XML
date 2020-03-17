@@ -90,7 +90,7 @@ public class InGameInfoCore {
 
     public void onTickClient() {
         ScaledResolution scaledResolution = new ScaledResolution(this.minecraft, this.minecraft.displayWidth, this.minecraft.displayHeight);
-        float scale = ConfigurationHandler.scale/10;
+        float scale = ConfigurationHandler.Scale/10;
         int scaledWidth = (int) (scaledResolution.getScaledWidth() / scale);
         int scaledHeight = (int) (scaledResolution.getScaledHeight() / scale);
 
@@ -173,7 +173,7 @@ public class InGameInfoCore {
     public void onTickRender() {
         // disable blending and reset to default (just in case)
         // fixes "washed-out" / bright text
-        float scale = ConfigurationHandler.scale/10;
+        float scale = ConfigurationHandler.Scale/10;
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 

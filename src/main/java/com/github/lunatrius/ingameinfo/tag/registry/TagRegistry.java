@@ -1,7 +1,18 @@
 package com.github.lunatrius.ingameinfo.tag.registry;
 
 import com.github.lunatrius.ingameinfo.reference.Reference;
-import com.github.lunatrius.ingameinfo.tag.*;
+import com.github.lunatrius.ingameinfo.tag.Tag;
+import com.github.lunatrius.ingameinfo.tag.TagFormatting;
+import com.github.lunatrius.ingameinfo.tag.TagMisc;
+import com.github.lunatrius.ingameinfo.tag.TagMouseOver;
+import com.github.lunatrius.ingameinfo.tag.TagNearbyPlayer;
+import com.github.lunatrius.ingameinfo.tag.TagPlayerEquipment;
+import com.github.lunatrius.ingameinfo.tag.TagPlayerGeneral;
+import com.github.lunatrius.ingameinfo.tag.TagPlayerPosition;
+import com.github.lunatrius.ingameinfo.tag.TagPlayerPotion;
+import com.github.lunatrius.ingameinfo.tag.TagRiding;
+import com.github.lunatrius.ingameinfo.tag.TagTime;
+import com.github.lunatrius.ingameinfo.tag.TagWorld;
 
 import java.util.ArrayList;
 import java.util.HashMap;

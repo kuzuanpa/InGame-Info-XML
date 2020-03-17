@@ -8,6 +8,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+import javax.xml.bind.annotation.XmlType;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,21 +24,21 @@ public class ConfigurationHandler {
     public static final boolean REPLACE_DEBUG_DEFAULT = false;
     public static final boolean SHOW_IN_CHAT_DEFAULT = true;
     public static final boolean SHOW_ON_PLAYER_LIST_DEFAULT = true;
-    public static final int SCALE_DEFAULT = 5;
+    public static final int DEFAULT_SCALE = 10;
     public static final int FILE_INTERVAL_DEFAULT = 5;
 
     public static String configName = CONFIG_NAME_DEFAULT;
     public static boolean replaceDebug = REPLACE_DEBUG_DEFAULT;
     public static boolean showInChat = SHOW_IN_CHAT_DEFAULT;
     public static boolean showOnPlayerList = SHOW_ON_PLAYER_LIST_DEFAULT;
-    public static float scale = (float) SCALE_DEFAULT;
+    public static float Scale = (float) DEFAULT_SCALE;
     public static int fileInterval = FILE_INTERVAL_DEFAULT;
 
     public static Property propConfigName = null;
     public static Property propReplaceDebug = null;
     public static Property propShowInChat = null;
     public static Property propShowOnPlayerList = null;
-    public static Property propScale = null;
+    public static Property propscale = null;
     public static Property propFileInterval = null;
     public static final Map<Alignment, Property> propAlignments = new HashMap<Alignment, Property>();
 
@@ -68,9 +69,9 @@ public class ConfigurationHandler {
         propShowOnPlayerList.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SHOW_ON_PLAYER_LIST);
         showOnPlayerList = propShowOnPlayerList.getBoolean(SHOW_ON_PLAYER_LIST_DEFAULT);
 
-        propScale = configuration.get(Names.Config.Category.GENERAL, Names.Config.SCALE, SCALE_DEFAULT, Names.Config.SCALE_DESC, 1, 25);
-        propScale.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SCALE);
-        scale = (float) propScale.getInt(SCALE_DEFAULT);
+        propscale = configuration.get(Names.Config.Category.GENERAL, Names.Config.SCALE_NAME, DEFAULT_SCALE, Names.Config.SCALE_DESCRIPTION, 1, 20);
+        propscale.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SCALE_NAME);
+        Scale = (float) propscale.getInt(DEFAULT_SCALE);
 
         propFileInterval = configuration.get(Names.Config.Category.GENERAL, Names.Config.FILE_INTERVAL, FILE_INTERVAL_DEFAULT, Names.Config.FILE_INTERVAL_DESC, 1, 60);
         propFileInterval.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.FILE_INTERVAL);
