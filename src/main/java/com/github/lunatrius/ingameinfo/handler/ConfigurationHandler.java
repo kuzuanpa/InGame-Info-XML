@@ -68,7 +68,7 @@ public class ConfigurationHandler {
         propShowOnPlayerList.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SHOW_ON_PLAYER_LIST);
         showOnPlayerList = propShowOnPlayerList.getBoolean(SHOW_ON_PLAYER_LIST_DEFAULT);
 
-        propScale = configuration.get(Names.Config.Category.GENERAL, Names.Config.SCALE, SCALE_DEFAULT, Names.Config.SCALE_DESC, 5, 20);
+        propScale = configuration.get(Names.Config.Category.GENERAL, Names.Config.SCALE, SCALE_DEFAULT, Names.Config.SCALE_DESC, 1, 25);
         propScale.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SCALE);
         scale = (float) propScale.getInt(SCALE_DEFAULT);
 
