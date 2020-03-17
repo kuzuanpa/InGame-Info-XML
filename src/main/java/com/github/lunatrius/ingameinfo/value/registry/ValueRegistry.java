@@ -1,11 +1,7 @@
 package com.github.lunatrius.ingameinfo.value.registry;
 
 import com.github.lunatrius.ingameinfo.reference.Reference;
-import com.github.lunatrius.ingameinfo.value.Value;
-import com.github.lunatrius.ingameinfo.value.ValueComplex;
-import com.github.lunatrius.ingameinfo.value.ValueLogic;
-import com.github.lunatrius.ingameinfo.value.ValueMath;
-import com.github.lunatrius.ingameinfo.value.ValueSimple;
+import com.github.lunatrius.ingameinfo.value.*;
 
 import java.util.HashMap;
 import java.util.Map;
