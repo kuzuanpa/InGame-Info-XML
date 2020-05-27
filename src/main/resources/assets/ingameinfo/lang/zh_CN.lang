@@ -15,6 +15,8 @@ ingameinfoxml.config.showOnPlayerList=玩家列表中显示
 ingameinfoxml.config.showOnPlayerList.tooltip=在玩家列表中显示信息.
 ingameinfoxml.config.scale=大小比例
 ingameinfoxml.config.scale.tooltip=信息显示界面大小由该数值比例确定.
+ingameinfoxml.config.fileInterval=文件读取间隔
+ingameinfoxml.config.fileInterval.tooltip='file'标记的文件读取间隔(秒).
 
 # gui - config - alignment
 ingameinfoxml.config.topleft=左上角
@@ -51,8 +53,10 @@ ingameinfoxml.tag.category.playerpotion.name=玩家 - 药水效果
 ingameinfoxml.tag.category.riding.name=骑乘
 ingameinfoxml.tag.category.time.name=世界时间
 ingameinfoxml.tag.category.world.name=世界名称
-ingameinfoxml.tag.category.simplyjetpacks.name=Simply Jetpacks
-ingameinfoxml.tag.category.thaumcraft.name=Thaumcraft
+ingameinfoxml.tag.category.bloodmagic.name=血魔法
+ingameinfoxml.tag.category.simplyjetpacks.name=简易喷气背包
+ingameinfoxml.tag.category.terrafirmacraft.name=群峦传说
+ingameinfoxml.tag.category.thaumcraft.name=神秘时代
 
 # gui - tag list - formatting tags
 ingameinfoxml.tag.black.desc=黑色(§0例子§r).
@@ -155,6 +159,8 @@ ingameinfoxml.tag.light.desc=你当前位置的光照等级.
 ingameinfoxml.tag.lightfeet.desc=你当前位置(脚下)的光照等级.
 ingameinfoxml.tag.lightnosun.desc=在没有阳光时你当前位置的光照等级.
 ingameinfoxml.tag.lightnosunfeet.desc=在没有阳光时你当前位置(脚下)的光照等级.
+ingameinfoxml.tag.lightsun.desc=你当前位置的阳光等级.
+ingameinfoxml.tag.lightsunfeet.desc=你当前位置(脚下)的阳光等级.
 ingameinfoxml.tag.score.desc=玩家得分.
 ingameinfoxml.tag.gamemode.desc=玩家游戏模式名称.
 ingameinfoxml.tag.gamemodeid.desc=玩家游戏模式id.
@@ -250,9 +256,12 @@ ingameinfoxml.tag.nextrain.desc=下一场雨倒计时.
 ingameinfoxml.tag.slimes.desc=如果当前区块为史莱姆区块就返回§e真§r, 否则就返回§e假§r.
 ingameinfoxml.tag.hardcore.desc=如果该游戏世界为极限模式就返回§e真§r, 否则就返回§e假§r.
 ingameinfoxml.tag.temperature.desc=生物群系温度.
+ingameinfoxml.tag.localtemperature.desc=你当前位置的生物群系温度.
 ingameinfoxml.tag.humidity.desc=生物群系湿度.
 
 # gui - tag list - integration - blood magic
+ingameinfoxml.tag.bmlp.desc=当前§4LP§r.
+ingameinfoxml.tag.bmmaxlp.desc=最大§4LP§r.
 
 # gui - tag list - integration - simply jetpacks
 ingameinfoxml.tag.sjenergy.desc=喷气背包能量值.
@@ -261,6 +270,20 @@ ingameinfoxml.tag.sjpercent.desc=喷气背包剩余能量值(以百分比为单�
 ingameinfoxml.tag.sjenabled.desc=若果该喷气背包可用就返回§e真§r, 否则就返回§e假§r.
 ingameinfoxml.tag.sjhover.desc=如果该喷气背包处于悬停模式就返回§e真§r, 否则就返回§e假§r.
 
+# gui - tag list - integration - terrafirmacraft
+ingameinfoxml.tag.tfcrainfall.desc=你当前位置的降水量.
+ingameinfoxml.tag.tfctemperature.desc=你当前位置的温度.
+ingameinfoxml.tag.tfcaveragetemperature.desc=你当前位置的年平均温度.
+ingameinfoxml.tag.tfctemperatureheatsources.desc=你当前位置的外部热源温度.
+ingameinfoxml.tag.tfcseason.desc=季节.
+ingameinfoxml.tag.tfcdate.desc=日期.
+ingameinfoxml.tag.tfcday.desc=日.
+ingameinfoxml.tag.tfcmonth.desc=月.
+ingameinfoxml.tag.tfcyear.desc=年.
+ingameinfoxml.tag.fmtskill.desc=%s 信息.
+ingameinfoxml.tag.fmtskillrank.desc=当前排名 %s.
+ingameinfoxml.tag.fmtskillprogress.desc=当前进度 %s.
+
 # gui - tag list - integration - thaumcraft
 ingameinfoxml.tag.tcwarpperm.desc=玩家的永久扭曲.
 ingameinfoxml.tag.tcwarpsticky.desc=玩家的一般扭曲(附着性).
@@ -268,6 +291,8 @@ ingameinfoxml.tag.tcwarptemp.desc=玩家的暂时性扭曲.
 ingameinfoxml.tag.tcwarptotal.desc=玩家的总扭曲.
 
 # keys
+ingameinfoxml.key.category=InGame Info XML
+ingameinfoxml.key.toggle=切换覆盖
 
 # commands
 commands.ingameinfoxml.usage=/igi <reload|load|save|enable|disable|taglist|config> [文件名]
