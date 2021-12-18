@@ -8,7 +8,7 @@ buildscript {
 		}
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://maven.minecraftforge.net/"
         }
         maven {
             name = "jitpack"
@@ -16,7 +16,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath "com.github.GTNH2:ForgeGradle:FG_1.2-SNAPSHOT"
+        classpath "com.github.GTNewHorizons:ForgeGradle:1.2.4"
     }
 }
 
@@ -78,14 +78,14 @@ processResources {
 }
 
 repositories {
-    ivy {
-        name = 'lunatrius\' ivy repo'
-        url 'http://mc.lunatri.us/files'
+    maven {
+        name = "jitpack"
+        url = "https://jitpack.io"
     }
 }
 
 dependencies {
-    compile group: group, name: 'LunatriusCore', version: "${project.version_minecraft}-${project.version_lunatriuscore}", classifier: 'dev'
+    compile "com.github.GTNewHorizons:LunatriusCore:master-SNAPSHOT:dev"
 }
 
 def addDependency(depFilter, depName, depPath) {
