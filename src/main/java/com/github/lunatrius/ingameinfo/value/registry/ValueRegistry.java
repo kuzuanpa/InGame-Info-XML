@@ -6,16 +6,15 @@ import com.github.lunatrius.ingameinfo.value.ValueComplex;
 import com.github.lunatrius.ingameinfo.value.ValueLogic;
 import com.github.lunatrius.ingameinfo.value.ValueMath;
 import com.github.lunatrius.ingameinfo.value.ValueSimple;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class ValueRegistry {
     public static final ValueRegistry INSTANCE = new ValueRegistry();
 
-    private Map<String, Value> stringValueMap = new HashMap<String, Value>();
-    private Map<String, Class<? extends Value>> stringClassMap = new HashMap<String, Class<? extends Value>>();
-    private Map<Class<? extends Value>, String> classStringMap = new HashMap<Class<? extends Value>, String>();
+    private final Map<String, Value> stringValueMap = new HashMap<>();
+    private final Map<String, Class<? extends Value>> stringClassMap = new HashMap<>();
+    private final Map<Class<? extends Value>, String> classStringMap = new HashMap<>();
 
     private void register(String name, Value value, boolean isAlias) {
         if (this.stringValueMap.containsKey(name)) {
@@ -48,10 +47,7 @@ public class ValueRegistry {
         try {
             final Class<? extends Value> clazz = this.stringClassMap.get(name);
             if (clazz != null) {
-                final Value value = clazz.newInstance();
-                if (value != null) {
-                    return value;
-                }
+                return clazz.newInstance();
             }
         } catch (Exception e) {
             Reference.logger.error(String.format("Failed to create an instance for %s!", name), e);

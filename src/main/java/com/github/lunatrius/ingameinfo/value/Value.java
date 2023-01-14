@@ -4,7 +4,6 @@ import com.github.lunatrius.ingameinfo.client.gui.Info;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import com.github.lunatrius.ingameinfo.value.registry.ValueRegistry;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -19,7 +18,7 @@ public abstract class Value {
     private String name = null;
     private String[] aliases = new String[0];
     protected String value = "";
-    public final List<Value> values = new ArrayList<Value>();
+    public final List<Value> values = new ArrayList<>();
 
     public Value setName(String name) {
         this.name = name;

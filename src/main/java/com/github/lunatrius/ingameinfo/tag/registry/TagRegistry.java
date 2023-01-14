@@ -13,7 +13,6 @@ import com.github.lunatrius.ingameinfo.tag.TagPlayerPotion;
 import com.github.lunatrius.ingameinfo.tag.TagRiding;
 import com.github.lunatrius.ingameinfo.tag.TagTime;
 import com.github.lunatrius.ingameinfo.tag.TagWorld;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.Map;
 public class TagRegistry {
     public static final TagRegistry INSTANCE = new TagRegistry();
 
-    private Map<String, Tag> stringTagMap = new HashMap<String, Tag>();
+    private final Map<String, Tag> stringTagMap = new HashMap<>();
 
     private void register(String name, Tag tag) {
         if (this.stringTagMap.containsKey(name)) {
@@ -52,7 +51,7 @@ public class TagRegistry {
     }
 
     public List<Tag> getRegisteredTags() {
-        List<Tag> tags = new ArrayList<Tag>();
+        List<Tag> tags = new ArrayList<>();
         for (Map.Entry<String, Tag> entry : this.stringTagMap.entrySet()) {
             tags.add(entry.getValue());
         }

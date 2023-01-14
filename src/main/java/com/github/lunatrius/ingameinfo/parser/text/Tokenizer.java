@@ -1,17 +1,17 @@
 package com.github.lunatrius.ingameinfo.parser.text;
 
+import static com.github.lunatrius.ingameinfo.parser.text.Token.TokenType;
+
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
 import java.util.regex.Matcher;
 
-import static com.github.lunatrius.ingameinfo.parser.text.Token.TokenType;
-
 public class Tokenizer {
     private final Queue<Token> tokens;
 
     public Tokenizer() {
-        this.tokens = new LinkedList<Token>();
+        this.tokens = new LinkedList<>();
     }
 
     public void tokenize(String str) throws Exception {

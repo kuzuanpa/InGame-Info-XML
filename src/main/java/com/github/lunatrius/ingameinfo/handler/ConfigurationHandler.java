@@ -5,14 +5,12 @@ import com.github.lunatrius.ingameinfo.reference.Names;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-
-import javax.xml.bind.annotation.XmlType;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 public class ConfigurationHandler {
     public static final ConfigurationHandler INSTANCE = new ConfigurationHandler();
@@ -20,6 +18,7 @@ public class ConfigurationHandler {
     public static Configuration configuration;
 
     public static final String CONFIG_NAME_DEFAULT = Names.Files.FILE_XML;
+    public static final boolean SHOW_HUD_DEFAULT = true;
     // TODO: 1.8 - flip the default to true
     public static final boolean REPLACE_DEBUG_DEFAULT = false;
     public static final boolean SHOW_IN_CHAT_DEFAULT = true;
@@ -28,6 +27,7 @@ public class ConfigurationHandler {
     public static final int FILE_INTERVAL_DEFAULT = 5;
 
     public static String configName = CONFIG_NAME_DEFAULT;
+    public static boolean showHUD = SHOW_HUD_DEFAULT;
     public static boolean replaceDebug = REPLACE_DEBUG_DEFAULT;
     public static boolean showInChat = SHOW_IN_CHAT_DEFAULT;
     public static boolean showOnPlayerList = SHOW_ON_PLAYER_LIST_DEFAULT;
@@ -35,12 +35,13 @@ public class ConfigurationHandler {
     public static int fileInterval = FILE_INTERVAL_DEFAULT;
 
     public static Property propConfigName = null;
+    public static Property propShowHUD = null;
     public static Property propReplaceDebug = null;
     public static Property propShowInChat = null;
     public static Property propShowOnPlayerList = null;
     public static Property propscale = null;
     public static Property propFileInterval = null;
-    public static final Map<Alignment, Property> propAlignments = new HashMap<Alignment, Property>();
+    public static final Map<Alignment, Property> propAlignments = new HashMap<>();
 
     private ConfigurationHandler() {}
 
@@ -52,10 +53,18 @@ public class ConfigurationHandler {
     }
 
     private static void loadConfiguration() {
+
+        // spotless:off
+
         propConfigName = configuration.get(Names.Config.Category.GENERAL, Names.Config.FILENAME, CONFIG_NAME_DEFAULT, Names.Config.FILENAME_DESC);
         propConfigName.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.FILENAME);
         propConfigName.setRequiresMcRestart(true);
         configName = propConfigName.getString();
+
+        propShowHUD = configuration.get(Names.Config.Category.GENERAL, Names.Config.SHOW_HUD, SHOW_HUD_DEFAULT, Names.Config.SHOW_HUD_DESC);
+        propShowHUD.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.SHOW_HUD);
+        propShowHUD.setRequiresMcRestart(false);
+        showHUD = propShowHUD.getBoolean(SHOW_HUD_DEFAULT);
 
         propReplaceDebug = configuration.get(Names.Config.Category.GENERAL, Names.Config.REPLACE_DEBUG, REPLACE_DEBUG_DEFAULT, Names.Config.REPLACE_DEBUG_DESC);
         propReplaceDebug.setLanguageKey(Names.Config.LANG_PREFIX + "." + Names.Config.REPLACE_DEBUG);
@@ -78,18 +87,27 @@ public class ConfigurationHandler {
         fileInterval = propFileInterval.getInt(FILE_INTERVAL_DEFAULT);
 
         for (Alignment alignment : Alignment.values()) {
-            Property property = configuration.get(Names.Config.Category.ALIGNMENT, alignment.toString().toLowerCase(), alignment.getDefaultXY(), String.format(Names.Config.ALIGNMENT_DESC, alignment.toString()));
+            Property property = configuration.get(Names.Config.Category.ALIGNMENT, alignment.toString().toLowerCase(), alignment.getDefaultXY(), String.format(Names.Config.ALIGNMENT_DESC, alignment));
             property.setLanguageKey(Names.Config.LANG_PREFIX + "." + alignment.toString().toLowerCase());
             property.setValidationPattern(Pattern.compile("-?\\d+ -?\\d+"));
             propAlignments.put(alignment, property);
             alignment.setXY(property.getString());
         }
 
+        // spotless:on
+
         save();
     }
 
     public static void reload() {
         loadConfiguration();
+        save();
+    }
+
+    public static void saveHUDsettingToFile() {
+        propShowHUD = configuration.get(
+                Names.Config.Category.GENERAL, Names.Config.SHOW_HUD, SHOW_HUD_DEFAULT, Names.Config.SHOW_HUD_DESC);
+        propShowHUD.set(showHUD);
         save();
     }
 

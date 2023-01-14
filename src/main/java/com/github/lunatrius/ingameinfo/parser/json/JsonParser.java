@@ -7,9 +7,9 @@ import com.github.lunatrius.ingameinfo.value.Value;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class JsonParser implements IParser {
     @Override
     public boolean load(InputStream inputStream) {
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
             com.google.gson.JsonParser parser = new com.google.gson.JsonParser();
 
             this.element = parser.parse(inputStreamReader);
@@ -55,7 +55,7 @@ public class JsonParser implements IParser {
     }
 
     private List<List<Value>> getLines(JsonElement elementLines) {
-        List<List<Value>> listLines = new ArrayList<List<Value>>();
+        List<List<Value>> listLines = new ArrayList<>();
 
         JsonArray arrayLines = elementLines.getAsJsonArray();
         for (JsonElement elementLine : arrayLines) {
@@ -68,7 +68,7 @@ public class JsonParser implements IParser {
     }
 
     private List<Value> getValues(JsonArray arrayValues) {
-        List<Value> values = new ArrayList<Value>();
+        List<Value> values = new ArrayList<>();
 
         for (JsonElement elementValue : arrayValues) {
             if (elementValue != null && elementValue.isJsonObject()) {

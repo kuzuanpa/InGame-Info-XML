@@ -4,17 +4,16 @@ import com.github.lunatrius.ingameinfo.Alignment;
 import com.github.lunatrius.ingameinfo.parser.IParser;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.value.Value;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class XmlParser implements IParser {
     private Document document;
@@ -56,7 +55,7 @@ public class XmlParser implements IParser {
     }
 
     private List<List<Value>> getLines(Element element) {
-        List<List<Value>> listLines = new ArrayList<List<Value>>();
+        List<List<Value>> listLines = new ArrayList<>();
 
         NodeList nodeListLine = element.getChildNodes();
         for (int i = 0; i < nodeListLine.getLength(); i++) {
@@ -70,13 +69,15 @@ public class XmlParser implements IParser {
     }
 
     private List<Value> getValues(Element element) {
-        List<Value> values = new ArrayList<Value>();
+        List<Value> values = new ArrayList<>();
 
         NodeList nodeListValues = element.getChildNodes();
         for (int i = 0; i < nodeListValues.getLength(); i++) {
             Element elementValue = getElement(nodeListValues.item(i));
             if (elementValue != null) {
-                final String type = elementValue.getNodeName().equalsIgnoreCase("value") ? elementValue.getAttribute("type") : elementValue.getNodeName();
+                final String type = elementValue.getNodeName().equalsIgnoreCase("value")
+                        ? elementValue.getAttribute("type")
+                        : elementValue.getNodeName();
                 final Value value = Value.fromString(type);
 
                 if (!value.isValid()) {

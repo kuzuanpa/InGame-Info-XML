@@ -1,33 +1,28 @@
 package com.github.lunatrius.ingameinfo.tag;
 
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
-import net.minecraft.entity.player.EntityPlayer;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import net.minecraft.entity.player.EntityPlayer;
 
 public abstract class TagNearbyPlayer extends Tag {
     public static final int MAXIMUM_INDEX = 16;
 
-    private static final Comparator<EntityPlayer> PLAYER_DISTANCE_COMPARATOR = new Comparator<EntityPlayer>() {
-        @Override
-        public int compare(EntityPlayer playerA, EntityPlayer playerB) {
-            if (Tag.player == null) {
-                return 0;
-            }
-
-            double distanceA = Tag.player.getDistanceSqToEntity(playerA);
-            double distanceB = Tag.player.getDistanceSqToEntity(playerB);
-            if (distanceA > distanceB) {
-                return 1;
-            } else if (distanceA < distanceB) {
-                return -1;
-            }
+    private static final Comparator<EntityPlayer> PLAYER_DISTANCE_COMPARATOR = (playerA, playerB) -> {
+        if (Tag.player == null) {
             return 0;
         }
+
+        double distanceA = Tag.player.getDistanceSqToEntity(playerA);
+        double distanceB = Tag.player.getDistanceSqToEntity(playerB);
+        if (distanceA > distanceB) {
+            return 1;
+        } else if (distanceA < distanceB) {
+            return -1;
+        }
+        return 0;
     };
     protected static EntityPlayer[] nearbyPlayers = null;
     protected final int index;
@@ -68,15 +63,17 @@ public abstract class TagNearbyPlayer extends Tag {
 
     protected static void updateNearbyPlayers() {
         if (nearbyPlayers == null) {
-            List<EntityPlayer> playerList = new ArrayList<EntityPlayer>();
-            for (EntityPlayer player : (List<EntityPlayer>) world.playerEntities) {
-                if (player != Tag.player && !player.isSneaking()) {
-                    playerList.add(player);
+            List<EntityPlayer> playerList = new ArrayList<>();
+            for (Object o : world.playerEntities) {
+                if (o instanceof EntityPlayer) {
+                    EntityPlayer entityPlayer = (EntityPlayer) o;
+                    if (entityPlayer != Tag.player && !entityPlayer.isSneaking()) {
+                        playerList.add(entityPlayer);
+                    }
                 }
             }
-
-            Collections.sort(playerList, PLAYER_DISTANCE_COMPARATOR);
-            nearbyPlayers = playerList.toArray(new EntityPlayer[playerList.size()]);
+            playerList.sort(PLAYER_DISTANCE_COMPARATOR);
+            nearbyPlayers = playerList.toArray(new EntityPlayer[0]);
         }
     }
 

@@ -1,18 +1,17 @@
 package com.github.lunatrius.ingameinfo.parser.text;
 
+import static com.github.lunatrius.ingameinfo.parser.text.Token.TokenType;
+
 import com.github.lunatrius.ingameinfo.Alignment;
 import com.github.lunatrius.ingameinfo.parser.IParser;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.value.Value;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static com.github.lunatrius.ingameinfo.parser.text.Token.TokenType;
 
 public class TextParser implements IParser {
     private final Tokenizer tokenizer;
@@ -34,16 +33,17 @@ public class TextParser implements IParser {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader reader = new BufferedReader(inputStreamReader);
-            String line, content = "";
+            String line;
+            StringBuilder content = new StringBuilder();
 
             while ((line = reader.readLine()) != null) {
-                content += line + "\n";
+                content.append(line).append("\n");
             }
 
             reader.close();
             inputStreamReader.close();
 
-            this.tokenizer.tokenize(content);
+            this.tokenizer.tokenize(content.toString());
         } catch (Exception e) {
             Reference.logger.fatal("Could not read text configuration file!", e);
             return false;
@@ -84,7 +84,7 @@ public class TextParser implements IParser {
         List<List<Value>> lines = format.get(this.alignment);
 
         if (lines == null) {
-            lines = new ArrayList<List<Value>>();
+            lines = new ArrayList<>();
         }
 
         try {
@@ -117,7 +117,7 @@ public class TextParser implements IParser {
 
     private boolean line(List<List<Value>> lines) throws AlignmentException {
         boolean expr;
-        List<Value> values = new ArrayList<Value>();
+        List<Value> values = new ArrayList<>();
 
         expr = values(values);
 

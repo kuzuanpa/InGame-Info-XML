@@ -1,7 +1,6 @@
 package com.github.lunatrius.ingameinfo.tag;
 
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -81,7 +80,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class Real24 extends TagTime {
-        private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
         @Override
         public String getValue() {
@@ -90,7 +89,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class Real12 extends TagTime {
-        private SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+        private final SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
 
         @Override
         public String getValue() {

@@ -2,11 +2,6 @@ package com.github.lunatrius.ingameinfo.client.gui;
 
 import com.github.lunatrius.ingameinfo.tag.Tag;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiListExtended;
-import net.minecraft.client.renderer.Tessellator;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +9,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiListExtended;
+import net.minecraft.client.renderer.Tessellator;
 
 public class GuiTagList extends GuiListExtended {
     public static final int OFFSET_X = 150;
@@ -27,9 +26,9 @@ public class GuiTagList extends GuiListExtended {
         super(minecraft, guiTags.width, guiTags.height, 18, guiTags.height - 30, 24);
         this.minecraft = minecraft;
 
-        this.map = new TreeMap<CategoryEntry, Set<TagEntry>>();
+        this.map = new TreeMap<>();
 
-        Map<String, CategoryEntry> stringCategoryEntryMap = new HashMap<String, CategoryEntry>();
+        Map<String, CategoryEntry> stringCategoryEntryMap = new HashMap<>();
         for (Tag tag : TagRegistry.INSTANCE.getRegisteredTags()) {
             String category = tag.getLocalizedCategory();
             String name = tag.getFormattedName();
@@ -39,7 +38,7 @@ public class GuiTagList extends GuiListExtended {
             if (categoryEntry == null) {
                 categoryEntry = new CategoryEntry(this.minecraft.fontRenderer, category);
                 stringCategoryEntryMap.put(category, categoryEntry);
-                this.map.put(categoryEntry, new TreeSet<TagEntry>());
+                this.map.put(categoryEntry, new TreeSet<>());
             }
             Set<TagEntry> tagEntries = this.map.get(categoryEntry);
             if (tagEntries != null) {
@@ -51,13 +50,14 @@ public class GuiTagList extends GuiListExtended {
     }
 
     public void filter(String pattern) {
-        List<IGuiListEntry> list = new ArrayList<IGuiListEntry>();
+        List<IGuiListEntry> list = new ArrayList<>();
         for (Map.Entry<CategoryEntry, Set<TagEntry>> entry : this.map.entrySet()) {
             list.add(entry.getKey());
 
             boolean added = false;
             for (TagEntry tag : entry.getValue()) {
-                if (tag.getName().toLowerCase().contains(pattern) || tag.getDesc().toLowerCase().contains(pattern)) {
+                if (tag.getName().toLowerCase().contains(pattern)
+                        || tag.getDesc().toLowerCase().contains(pattern)) {
                     added = true;
                     list.add(tag);
                 }
@@ -68,7 +68,7 @@ public class GuiTagList extends GuiListExtended {
             }
         }
 
-        this.entries = list.toArray(new IGuiListEntry[list.size()]);
+        this.entries = list.toArray(new IGuiListEntry[0]);
     }
 
     @Override
@@ -91,15 +91,14 @@ public class GuiTagList extends GuiListExtended {
         return this.width / 2 + getListWidth() / 2 - SCROLLBAR_WIDTH;
     }
 
-    public abstract class ListEntry implements IGuiListEntry, Comparable<ListEntry> {
+    public abstract static class ListEntry implements IGuiListEntry, Comparable<ListEntry> {
         @Override
         public boolean mousePressed(int index, int x, int y, int mouseEvent, int relativeX, int relativeY) {
             return false;
         }
 
         @Override
-        public void mouseReleased(int index, int x, int y, int mouseEvent, int relativeX, int relativeY) {
-        }
+        public void mouseReleased(int index, int x, int y, int mouseEvent, int relativeX, int relativeY) {}
 
         public abstract String getName();
 
@@ -109,7 +108,7 @@ public class GuiTagList extends GuiListExtended {
         }
     }
 
-    public class CategoryEntry extends ListEntry {
+    public static class CategoryEntry extends ListEntry {
         private final FontRenderer fontRenderer;
         private final String name;
 
@@ -119,8 +118,21 @@ public class GuiTagList extends GuiListExtended {
         }
 
         @Override
-        public void drawEntry(int index, int x, int y, int width, int height, Tessellator tessellator, int mouseX, int mouseY, boolean isSelected) {
-            this.fontRenderer.drawString(this.name, x + (width - this.fontRenderer.getStringWidth(this.name)) / 2, y + (height - this.fontRenderer.FONT_HEIGHT + 1) / 2, 0xFFFFFF);
+        public void drawEntry(
+                int index,
+                int x,
+                int y,
+                int width,
+                int height,
+                Tessellator tessellator,
+                int mouseX,
+                int mouseY,
+                boolean isSelected) {
+            this.fontRenderer.drawString(
+                    this.name,
+                    x + (width - this.fontRenderer.getStringWidth(this.name)) / 2,
+                    y + (height - this.fontRenderer.FONT_HEIGHT + 1) / 2,
+                    0xFFFFFF);
         }
 
         @Override
@@ -143,7 +155,7 @@ public class GuiTagList extends GuiListExtended {
         }
 
         private String[] getDescArray(String desc) {
-            List<String> list = new ArrayList<String>();
+            List<String> list = new ArrayList<>();
 
             int width = getListWidth() - OFFSET_X - SCROLLBAR_WIDTH;
             if (this.fontRenderer.getStringWidth(desc) < width) {
@@ -161,16 +173,29 @@ public class GuiTagList extends GuiListExtended {
                 list.add(desc);
             }
 
-            return list.toArray(new String[list.size()]);
+            return list.toArray(new String[0]);
         }
 
         @Override
-        public void drawEntry(int index, int x, int y, int width, int height, Tessellator tessellator, int mouseX, int mouseY, boolean isSelected) {
+        public void drawEntry(
+                int index,
+                int x,
+                int y,
+                int width,
+                int height,
+                Tessellator tessellator,
+                int mouseX,
+                int mouseY,
+                boolean isSelected) {
             this.fontRenderer.drawString(this.name, x, y + height / 2 - this.fontRenderer.FONT_HEIGHT / 2, 0xFFFFFF);
 
             int lineHeight = this.fontRenderer.FONT_HEIGHT + 1;
             for (int i = 0; i < this.descArray.length; i++) {
-                this.fontRenderer.drawString(this.descArray[i], x + OFFSET_X, y + (height - lineHeight * this.descArray.length) / 2 + lineHeight * i, 0xFFFFFF);
+                this.fontRenderer.drawString(
+                        this.descArray[i],
+                        x + OFFSET_X,
+                        y + (height - lineHeight * this.descArray.length) / 2 + lineHeight * i,
+                        0xFFFFFF);
             }
         }
 

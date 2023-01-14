@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class Token {
-    public static enum TokenType {
+    public enum TokenType {
         EOF("$"),
         FUNC_HEAD("<"),
         FUNC_TAIL(">"),
@@ -15,10 +15,10 @@ public class Token {
         NEWLINE("\\n+"),
         STRING("(\\\\[<>\\[/\\]\\\\]|[^<>\\[/\\]\\n])+");
 
-        public final static EnumSet<TokenType> EXCEPTIONS = EnumSet.of(FUNC_TAIL, ARGS_HEAD, ARGS_SEPARATOR, ARGS_TAIL);
+        public static final EnumSet<TokenType> EXCEPTIONS = EnumSet.of(FUNC_TAIL, ARGS_HEAD, ARGS_SEPARATOR, ARGS_TAIL);
         private final Pattern pattern;
 
-        private TokenType(String regex) {
+        TokenType(String regex) {
             this.pattern = Pattern.compile("^" + regex);
         }
 
@@ -41,7 +41,14 @@ public class Token {
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH, "%s, %s, %s, %s, %s", this.lexem.replace("\r", "\\r").replace("\n", "\\n").replace("\t", "\\t"), this.type, this.locationStart, this.locationEnd, this.isEof());
+        return String.format(
+                Locale.ENGLISH,
+                "%s, %s, %s, %s, %s",
+                this.lexem.replace("\r", "\\r").replace("\n", "\\n").replace("\t", "\\t"),
+                this.type,
+                this.locationStart,
+                this.locationEnd,
+                this.isEof());
     }
 
     public String getLexem() {
