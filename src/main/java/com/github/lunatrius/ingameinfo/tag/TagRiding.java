@@ -1,14 +1,17 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.reference.Reference;
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityHorse;
 
+import com.github.lunatrius.ingameinfo.reference.Reference;
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+
 public abstract class TagRiding extends Tag {
+
     private static final int TICKS = 20;
     private static final double CONSTANT = 2.15858575199013618; // playerSpeed / internalPlayerSpeed (0.1)
 
@@ -18,6 +21,7 @@ public abstract class TagRiding extends Tag {
     }
 
     public static class IsHorse extends TagRiding {
+
         @Override
         public String getValue() {
             return String.valueOf(player.ridingEntity instanceof EntityHorse);
@@ -25,6 +29,7 @@ public abstract class TagRiding extends Tag {
     }
 
     public static class HorseHealth extends TagRiding {
+
         @Override
         public String getValue() {
             if (player.ridingEntity instanceof EntityHorse) {
@@ -35,6 +40,7 @@ public abstract class TagRiding extends Tag {
     }
 
     public static class HorseMaxHealth extends TagRiding {
+
         @Override
         public String getValue() {
             if (player.ridingEntity instanceof EntityHorse) {
@@ -45,23 +51,23 @@ public abstract class TagRiding extends Tag {
     }
 
     public static class HorseSpeed extends TagRiding {
+
         @Override
         public String getValue() {
             if (player.ridingEntity instanceof EntityHorse) {
                 return String.format(
                         Locale.ENGLISH,
                         "%.3f",
-                        TICKS
-                                * CONSTANT
+                        TICKS * CONSTANT
                                 * ((EntityHorse) player.ridingEntity)
-                                        .getEntityAttribute(SharedMonsterAttributes.movementSpeed)
-                                        .getAttributeValue());
+                                        .getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
             }
             return "-1";
         }
     }
 
     public static class HorseJump extends TagRiding {
+
         private final Map<Double, Double> jumpHeightCache = new HashMap<>();
 
         private double getJumpHeight(final EntityHorse horse) {
@@ -103,7 +109,6 @@ public abstract class TagRiding extends Tag {
         TagRegistry.INSTANCE.register(new HorseHealth().setName("horsehealth"));
         TagRegistry.INSTANCE.register(new HorseMaxHealth().setName("horsemaxhealth"));
         TagRegistry.INSTANCE.register(new HorseSpeed().setName("horsespeed"));
-        TagRegistry.INSTANCE.register(
-                new HorseJump().setName("horsejumpstrength").setAliases("horsejumpstr"));
+        TagRegistry.INSTANCE.register(new HorseJump().setName("horsejumpstrength").setAliases("horsejumpstr"));
     }
 }

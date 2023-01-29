@@ -6,6 +6,7 @@ import com.github.lunatrius.ingameinfo.reference.Names;
 
 @SuppressWarnings("UnusedDeclaration")
 public class BloodMagic extends Plugin {
+
     @Override
     public String getDependency() {
         return Names.Mods.BLOODMAGIC_MODID;

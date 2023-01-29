@@ -1,17 +1,20 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.core.util.vector.Vector3f;
-import com.github.lunatrius.core.util.vector.Vector3i;
-import com.github.lunatrius.ingameinfo.client.gui.Info;
-import com.github.lunatrius.ingameinfo.reference.Reference;
 import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
+import com.github.lunatrius.core.util.vector.Vector3f;
+import com.github.lunatrius.core.util.vector.Vector3i;
+import com.github.lunatrius.ingameinfo.client.gui.Info;
+import com.github.lunatrius.ingameinfo.reference.Reference;
+
 public abstract class Tag {
+
     protected static final Minecraft minecraft = Minecraft.getMinecraft();
     protected static final Vector3i playerPosition = new Vector3i();
     protected static final Vector3f playerMotion = new Vector3f();
@@ -99,10 +102,12 @@ public abstract class Tag {
         Tag.player = player;
 
         if (player != null) {
-            playerPosition.set(
-                    (int) Math.floor(player.posX), (int) Math.floor(player.posY), (int) Math.floor(player.posZ));
-            playerMotion.set((float) (player.posX - player.prevPosX), (float) (player.posY - player.prevPosY), (float)
-                    (player.posZ - player.prevPosZ));
+            playerPosition
+                    .set((int) Math.floor(player.posX), (int) Math.floor(player.posY), (int) Math.floor(player.posZ));
+            playerMotion.set(
+                    (float) (player.posX - player.prevPosX),
+                    (float) (player.posY - player.prevPosY),
+                    (float) (player.posZ - player.prevPosZ));
         }
     }
 

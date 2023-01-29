@@ -1,9 +1,11 @@
 package com.github.lunatrius.ingameinfo.client.gui;
 
-import com.github.lunatrius.core.client.gui.FontRendererHelper;
 import net.minecraft.client.gui.FontRenderer;
 
+import com.github.lunatrius.core.client.gui.FontRendererHelper;
+
 public class InfoText extends Info {
+
     private final FontRenderer fontRenderer;
     private final String text;
 
@@ -36,6 +38,11 @@ public class InfoText extends Info {
     public String toString() {
         return String.format(
                 "InfoText{text: %s, x: %d, y: %d, offsetX: %d, offsetY: %d, children: %s}",
-                this.text, this.x, this.y, this.offsetX, this.offsetY, this.children);
+                this.text,
+                this.x,
+                this.y,
+                this.offsetX,
+                this.offsetY,
+                this.children);
     }
 }

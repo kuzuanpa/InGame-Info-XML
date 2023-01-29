@@ -1,16 +1,18 @@
 package com.github.lunatrius.ingameinfo.value;
 
-import com.github.lunatrius.ingameinfo.client.gui.Info;
-import com.github.lunatrius.ingameinfo.reference.Reference;
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
-import com.github.lunatrius.ingameinfo.value.registry.ValueRegistry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.github.lunatrius.ingameinfo.client.gui.Info;
+import com.github.lunatrius.ingameinfo.reference.Reference;
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+import com.github.lunatrius.ingameinfo.value.registry.ValueRegistry;
+
 public abstract class Value {
+
     private static final Pattern PATTERN = Pattern.compile("\\{([a-z0-9]+)\\}", Pattern.CASE_INSENSITIVE);
     private static final Matcher MATCHER = PATTERN.matcher("");
     protected static List<Info> info;

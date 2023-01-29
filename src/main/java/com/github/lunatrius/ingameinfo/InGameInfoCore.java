@@ -1,5 +1,26 @@
 package com.github.lunatrius.ingameinfo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.resources.IResource;
+import net.minecraft.profiler.Profiler;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import com.github.lunatrius.ingameinfo.client.gui.Info;
 import com.github.lunatrius.ingameinfo.client.gui.InfoText;
 import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
@@ -16,26 +37,9 @@ import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;
 import com.github.lunatrius.ingameinfo.value.Value;
 import com.github.lunatrius.ingameinfo.value.ValueComplex;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.resources.IResource;
-import net.minecraft.profiler.Profiler;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import org.lwjgl.opengl.GL11;
 
 public class InGameInfoCore {
+
     private static final Pattern PATTERN = Pattern.compile("\\{ICON\\|( *)\\}", Pattern.CASE_INSENSITIVE);
     private static final Matcher MATCHER = PATTERN.matcher("");
     public static final InGameInfoCore INSTANCE = new InGameInfoCore();
@@ -49,8 +53,10 @@ public class InGameInfoCore {
     private final Map<Alignment, List<List<Value>>> format = new HashMap<>();
     private final List<Info> info = new ArrayList<>();
     private final List<Info> infoItemQueue = new ArrayList<>();
-    private ScaledResolution scaledResolution =
-            new ScaledResolution(this.minecraft, this.minecraft.displayWidth, this.minecraft.displayHeight);
+    private ScaledResolution scaledResolution = new ScaledResolution(
+            this.minecraft,
+            this.minecraft.displayWidth,
+            this.minecraft.displayHeight);
 
     private InGameInfoCore() {
         Tag.setInfo(this.infoItemQueue);

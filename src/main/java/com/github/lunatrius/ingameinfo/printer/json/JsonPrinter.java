@@ -1,5 +1,11 @@
 package com.github.lunatrius.ingameinfo.printer.json;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.List;
+import java.util.Map;
+
 import com.github.lunatrius.ingameinfo.Alignment;
 import com.github.lunatrius.ingameinfo.printer.IPrinter;
 import com.github.lunatrius.ingameinfo.reference.Reference;
@@ -8,13 +14,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.List;
-import java.util.Map;
 
 public class JsonPrinter implements IPrinter {
+
     @Override
     public boolean print(File file, Map<Alignment, List<List<Value>>> format) {
         try {

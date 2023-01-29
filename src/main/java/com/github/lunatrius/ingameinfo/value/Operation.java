@@ -1,13 +1,16 @@
 package com.github.lunatrius.ingameinfo.value;
 
 public enum Operation {
+
     INVALID {
+
         @Override
         public String getValue(Value value) {
             return "null";
         }
     },
     GT {
+
         @Override
         public String getValue(Value value) {
             int size = value.values.size();
@@ -23,6 +26,7 @@ public enum Operation {
         }
     },
     LT {
+
         @Override
         public String getValue(Value value) {
             int size = value.values.size();
@@ -38,6 +42,7 @@ public enum Operation {
         }
     },
     GE {
+
         @Override
         public String getValue(Value value) {
             int size = value.values.size();
@@ -53,6 +58,7 @@ public enum Operation {
         }
     },
     LE {
+
         @Override
         public String getValue(Value value) {
             int size = value.values.size();
@@ -68,6 +74,7 @@ public enum Operation {
         }
     },
     EQ {
+
         @Override
         public String getValue(Value value) {
             int size = value.values.size();
@@ -94,6 +101,7 @@ public enum Operation {
         }
     },
     NE {
+
         @Override
         public String getValue(Value value) {
             int size = value.values.size();

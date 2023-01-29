@@ -2,10 +2,6 @@ package com.github.lunatrius.ingameinfo.parser.text;
 
 import static com.github.lunatrius.ingameinfo.parser.text.Token.TokenType;
 
-import com.github.lunatrius.ingameinfo.Alignment;
-import com.github.lunatrius.ingameinfo.parser.IParser;
-import com.github.lunatrius.ingameinfo.reference.Reference;
-import com.github.lunatrius.ingameinfo.value.Value;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,7 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.github.lunatrius.ingameinfo.Alignment;
+import com.github.lunatrius.ingameinfo.parser.IParser;
+import com.github.lunatrius.ingameinfo.reference.Reference;
+import com.github.lunatrius.ingameinfo.value.Value;
+
 public class TextParser implements IParser {
+
     private final Tokenizer tokenizer;
     private Token token;
     private int level = 0;

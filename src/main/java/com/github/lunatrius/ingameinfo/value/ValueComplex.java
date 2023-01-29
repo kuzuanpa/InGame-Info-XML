@@ -1,5 +1,20 @@
 package com.github.lunatrius.ingameinfo.value;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
 import com.github.lunatrius.core.entity.EntityHelper;
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.client.gui.InfoIcon;
@@ -9,27 +24,16 @@ import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;
 import com.github.lunatrius.ingameinfo.value.registry.ValueRegistry;
 import cpw.mods.fml.common.registry.GameData;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public abstract class ValueComplex extends Value {
+
     @Override
     public boolean isSimple() {
         return false;
     }
 
     public static class ValueOperation extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() > 1;
@@ -47,6 +51,7 @@ public abstract class ValueComplex extends Value {
     }
 
     public static class ValueConcat extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() > 1;
@@ -63,6 +68,7 @@ public abstract class ValueComplex extends Value {
     }
 
     public static class ValueMin extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() == 2 || this.values.size() == 4;
@@ -82,6 +88,7 @@ public abstract class ValueComplex extends Value {
     }
 
     public static class ValueMax extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() == 2 || this.values.size() == 4;
@@ -101,6 +108,7 @@ public abstract class ValueComplex extends Value {
     }
 
     public static class ValueItemQuantity extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() == 1 || this.values.size() == 2;
@@ -119,8 +127,11 @@ public abstract class ValueComplex extends Value {
                 if (this.values.size() == 2) {
                     itemDamage = getIntValue(1);
                 }
-                return String.valueOf(EntityHelper.getItemCountInInventory(
-                        Minecraft.getMinecraft().thePlayer.inventory, item, itemDamage));
+                return String.valueOf(
+                        EntityHelper.getItemCountInInventory(
+                                Minecraft.getMinecraft().thePlayer.inventory,
+                                item,
+                                itemDamage));
             } catch (Exception e2) {
                 return "0";
             }
@@ -128,6 +139,7 @@ public abstract class ValueComplex extends Value {
     }
 
     public static class ValueTranslate extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() > 0;
@@ -149,6 +161,7 @@ public abstract class ValueComplex extends Value {
     }
 
     public static class ValueFormattedTime extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() == 1;
@@ -166,6 +179,7 @@ public abstract class ValueComplex extends Value {
     }
 
     public static class ValueFile extends ValueComplex {
+
         private static int ticks = 0;
 
         private final Map<String, String> cache = new HashMap<>();
@@ -226,10 +240,10 @@ public abstract class ValueComplex extends Value {
     }
 
     public static class ValueIcon extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
-            return this.values.size() == 1
-                    || this.values.size() == 2
+            return this.values.size() == 1 || this.values.size() == 2
                     || this.values.size() == 5
                     || this.values.size() == 7
                     || this.values.size() == 11;
@@ -306,8 +320,7 @@ public abstract class ValueComplex extends Value {
         ValueRegistry.INSTANCE.register(new ValueMin().setName("min").setAliases("minimum"));
         ValueRegistry.INSTANCE.register(new ValueItemQuantity().setName("itemquantity"));
         ValueRegistry.INSTANCE.register(new ValueTranslate().setName("trans").setAliases("translate"));
-        ValueRegistry.INSTANCE.register(
-                new ValueFormattedTime().setName("formattedtime").setAliases("rltimef"));
+        ValueRegistry.INSTANCE.register(new ValueFormattedTime().setName("formattedtime").setAliases("rltimef"));
         ValueRegistry.INSTANCE.register(new ValueIcon().setName("icon").setAliases("img", "image"));
         ValueRegistry.INSTANCE.register(new ValueFile().setName("file"));
     }

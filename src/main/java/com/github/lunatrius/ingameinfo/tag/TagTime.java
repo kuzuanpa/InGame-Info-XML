@@ -1,17 +1,20 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+
 public abstract class TagTime extends Tag {
+
     @Override
     public String getCategory() {
         return "time";
     }
 
     public static class MinecraftTotal extends TagTime {
+
         @Override
         public String getValue() {
             long seconds = world.getTotalWorldTime() / 20;
@@ -29,6 +32,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class MinecraftDay extends TagTime {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%d", world.getWorldTime() / 24000);
@@ -36,6 +40,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class MinecraftHour extends TagTime {
+
         @Override
         public String getValue() {
             long hour = (world.getWorldTime() / 1000 + 6) % 24;
@@ -44,6 +49,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class MinecraftMinute extends TagTime {
+
         @Override
         public String getValue() {
             long minute = (world.getWorldTime() % 1000) * 60 / 1000;
@@ -52,6 +58,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class Minecraft24 extends TagTime {
+
         @Override
         public String getValue() {
             long time = world.getWorldTime();
@@ -62,6 +69,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class Minecraft12 extends TagTime {
+
         @Override
         public String getValue() {
             long time = world.getWorldTime();
@@ -80,6 +88,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class Real24 extends TagTime {
+
         private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
         @Override
@@ -89,6 +98,7 @@ public abstract class TagTime extends Tag {
     }
 
     public static class Real12 extends TagTime {
+
         private final SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
 
         @Override

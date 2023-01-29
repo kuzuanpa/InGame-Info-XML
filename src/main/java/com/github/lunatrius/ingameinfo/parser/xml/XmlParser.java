@@ -1,21 +1,25 @@
 package com.github.lunatrius.ingameinfo.parser.xml;
 
-import com.github.lunatrius.ingameinfo.Alignment;
-import com.github.lunatrius.ingameinfo.parser.IParser;
-import com.github.lunatrius.ingameinfo.reference.Reference;
-import com.github.lunatrius.ingameinfo.value.Value;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.github.lunatrius.ingameinfo.Alignment;
+import com.github.lunatrius.ingameinfo.parser.IParser;
+import com.github.lunatrius.ingameinfo.reference.Reference;
+import com.github.lunatrius.ingameinfo.value.Value;
+
 public class XmlParser implements IParser {
+
     private Document document;
 
     @Override

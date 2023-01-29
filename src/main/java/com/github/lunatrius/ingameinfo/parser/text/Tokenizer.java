@@ -8,6 +8,7 @@ import java.util.Queue;
 import java.util.regex.Matcher;
 
 public class Tokenizer {
+
     private final Queue<Token> tokens;
 
     public Tokenizer() {

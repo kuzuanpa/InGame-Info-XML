@@ -1,13 +1,16 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+
 import net.minecraft.entity.player.EntityPlayer;
 
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+
 public abstract class TagNearbyPlayer extends Tag {
+
     public static final int MAXIMUM_INDEX = 16;
 
     private static final Comparator<EntityPlayer> PLAYER_DISTANCE_COMPARATOR = (playerA, playerB) -> {
@@ -78,6 +81,7 @@ public abstract class TagNearbyPlayer extends Tag {
     }
 
     public static class Name extends TagNearbyPlayer {
+
         public Name(int index) {
             super(index);
         }
@@ -93,6 +97,7 @@ public abstract class TagNearbyPlayer extends Tag {
     }
 
     public static class Distance extends TagNearbyPlayer {
+
         public Distance(int index) {
             super(index);
         }

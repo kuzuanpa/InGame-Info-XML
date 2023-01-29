@@ -1,18 +1,22 @@
 package com.github.lunatrius.ingameinfo.handler;
 
-import com.github.lunatrius.ingameinfo.Alignment;
-import com.github.lunatrius.ingameinfo.reference.Names;
-import com.github.lunatrius.ingameinfo.reference.Reference;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+import com.github.lunatrius.ingameinfo.Alignment;
+import com.github.lunatrius.ingameinfo.reference.Names;
+import com.github.lunatrius.ingameinfo.reference.Reference;
+
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 public class ConfigurationHandler {
+
     public static final ConfigurationHandler INSTANCE = new ConfigurationHandler();
 
     public static Configuration configuration;
@@ -106,7 +110,10 @@ public class ConfigurationHandler {
 
     public static void saveHUDsettingToFile() {
         propShowHUD = configuration.get(
-                Names.Config.Category.GENERAL, Names.Config.SHOW_HUD, SHOW_HUD_DEFAULT, Names.Config.SHOW_HUD_DESC);
+                Names.Config.Category.GENERAL,
+                Names.Config.SHOW_HUD,
+                SHOW_HUD_DEFAULT,
+                Names.Config.SHOW_HUD_DESC);
         propShowHUD.set(showHUD);
         save();
     }

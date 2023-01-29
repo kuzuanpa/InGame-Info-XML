@@ -1,12 +1,15 @@
 package com.github.lunatrius.ingameinfo.integration;
 
-import com.github.lunatrius.ingameinfo.reference.Reference;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.lunatrius.ingameinfo.reference.Reference;
+
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
 public class PluginLoader {
+
     private final List<Plugin> plugins = new ArrayList<>();
 
     private static PluginLoader instance = null;
@@ -20,12 +23,10 @@ public class PluginLoader {
     }
 
     public void preInit(final FMLPreInitializationEvent event) {
-        final String[] names = new String[] {
-            "com.github.lunatrius.ingameinfo.integration.bloodmagic.BloodMagic",
-            "com.github.lunatrius.ingameinfo.integration.simplyjetpacks.SimplyJetpacks",
-            "com.github.lunatrius.ingameinfo.integration.terrafirmacraft.TerraFirmaCraft",
-            "com.github.lunatrius.ingameinfo.integration.thaumcraft.Thaumcraft"
-        };
+        final String[] names = new String[] { "com.github.lunatrius.ingameinfo.integration.bloodmagic.BloodMagic",
+                "com.github.lunatrius.ingameinfo.integration.simplyjetpacks.SimplyJetpacks",
+                "com.github.lunatrius.ingameinfo.integration.terrafirmacraft.TerraFirmaCraft",
+                "com.github.lunatrius.ingameinfo.integration.thaumcraft.Thaumcraft" };
 
         for (final String name : names) {
             try {

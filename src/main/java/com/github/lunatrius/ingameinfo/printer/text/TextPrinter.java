@@ -1,12 +1,5 @@
 package com.github.lunatrius.ingameinfo.printer.text;
 
-import com.github.lunatrius.ingameinfo.Alignment;
-import com.github.lunatrius.ingameinfo.printer.IPrinter;
-import com.github.lunatrius.ingameinfo.reference.Reference;
-import com.github.lunatrius.ingameinfo.value.Value;
-import com.github.lunatrius.ingameinfo.value.ValueComplex;
-import com.github.lunatrius.ingameinfo.value.ValueLogic;
-import com.github.lunatrius.ingameinfo.value.ValueSimple;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -14,7 +7,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.github.lunatrius.ingameinfo.Alignment;
+import com.github.lunatrius.ingameinfo.printer.IPrinter;
+import com.github.lunatrius.ingameinfo.reference.Reference;
+import com.github.lunatrius.ingameinfo.value.Value;
+import com.github.lunatrius.ingameinfo.value.ValueComplex;
+import com.github.lunatrius.ingameinfo.value.ValueLogic;
+import com.github.lunatrius.ingameinfo.value.ValueSimple;
+
 public class TextPrinter implements IPrinter {
+
     @Override
     public boolean print(File file, Map<Alignment, List<List<Value>>> format) {
         try {
@@ -83,21 +85,21 @@ public class TextPrinter implements IPrinter {
                     writer.write("]");
                 } else if (value.getClass() == ValueComplex.ValueMin.class
                         || value.getClass() == ValueComplex.ValueMax.class) {
-                    writer.write("/");
-                    writeValue(writer, values.get(1));
-                    if (size == 4) {
-                        writer.write("[");
-                        writeValue(writer, values.get(2));
-                        writer.write("/");
-                        writeValue(writer, values.get(3));
-                        writer.write("]");
-                    }
-                } else {
-                    for (int i = 1; i < size; i++) {
-                        writer.write("/");
-                        writeValue(writer, values.get(i));
-                    }
-                }
+                            writer.write("/");
+                            writeValue(writer, values.get(1));
+                            if (size == 4) {
+                                writer.write("[");
+                                writeValue(writer, values.get(2));
+                                writer.write("/");
+                                writeValue(writer, values.get(3));
+                                writer.write("]");
+                            }
+                        } else {
+                            for (int i = 1; i < size; i++) {
+                                writer.write("/");
+                                writeValue(writer, values.get(i));
+                            }
+                        }
                 writer.write("]>");
             }
         } else {

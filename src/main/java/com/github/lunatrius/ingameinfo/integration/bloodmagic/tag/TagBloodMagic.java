@@ -1,16 +1,19 @@
 package com.github.lunatrius.ingameinfo.integration.bloodmagic.tag;
 
 import WayofTime.alchemicalWizardry.api.spell.APISpellHelper;
+
 import com.github.lunatrius.ingameinfo.tag.TagIntegration;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 
 public abstract class TagBloodMagic extends TagIntegration {
+
     @Override
     public String getCategory() {
         return "bloodmagic";
     }
 
     public static class CurrentLP extends TagBloodMagic {
+
         @Override
         public String getValue() {
             try {
@@ -23,6 +26,7 @@ public abstract class TagBloodMagic extends TagIntegration {
     }
 
     public static class MaximumLP extends TagBloodMagic {
+
         @Override
         public String getValue() {
             try {

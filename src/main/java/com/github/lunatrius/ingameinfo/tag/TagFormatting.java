@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo.tag;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 
 public abstract class TagFormatting extends Tag {
+
     private static final String SIGN = "\u00a7";
 
     @Override
@@ -11,6 +12,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Black extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "0";
@@ -18,6 +20,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class DarkBlue extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "1";
@@ -25,6 +28,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class DarkGreen extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "2";
@@ -32,6 +36,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class DarkAqua extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "3";
@@ -39,6 +44,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class DarkRed extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "4";
@@ -46,6 +52,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class DarkPurple extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "5";
@@ -53,6 +60,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Gold extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "6";
@@ -60,6 +68,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Gray extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "7";
@@ -67,6 +76,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class DarkGray extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "8";
@@ -74,6 +84,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Blue extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "9";
@@ -81,6 +92,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Green extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "a";
@@ -88,6 +100,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Aqua extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "b";
@@ -95,6 +108,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Red extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "c";
@@ -102,6 +116,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class LightPurple extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "d";
@@ -109,6 +124,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Yellow extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "e";
@@ -116,6 +132,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class White extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "f";
@@ -123,6 +140,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Obfuscated extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "k";
@@ -130,6 +148,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Bold extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "l";
@@ -137,6 +156,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Strikethrough extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "m";
@@ -144,6 +164,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Underline extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "n";
@@ -151,6 +172,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Italic extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "o";
@@ -158,6 +180,7 @@ public abstract class TagFormatting extends Tag {
     }
 
     public static class Reset extends TagFormatting {
+
         @Override
         public String getValue() {
             return SIGN + "r";
@@ -183,8 +206,7 @@ public abstract class TagFormatting extends Tag {
         TagRegistry.INSTANCE.register(new White().setName("white"));
         TagRegistry.INSTANCE.register(new Obfuscated().setName("obfuscated").setAliases("random"));
         TagRegistry.INSTANCE.register(new Bold().setName("bold").setAliases("b"));
-        TagRegistry.INSTANCE.register(
-                new Strikethrough().setName("strikethrough").setAliases("strike", "s"));
+        TagRegistry.INSTANCE.register(new Strikethrough().setName("strikethrough").setAliases("strike", "s"));
         TagRegistry.INSTANCE.register(new Underline().setName("underline").setAliases("u"));
         TagRegistry.INSTANCE.register(new Italic().setName("italic").setAliases("italics", "i"));
         TagRegistry.INSTANCE.register(new Reset().setName("reset").setAliases("r"));

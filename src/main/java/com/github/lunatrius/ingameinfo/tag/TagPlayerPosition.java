@@ -1,18 +1,20 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import java.util.Locale;
+
 import net.minecraft.util.MathHelper;
 
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+
 public abstract class TagPlayerPosition extends Tag {
+
     private static final int TICKS = 20;
 
-    protected static final String[] ROUGHDIRECTION = {"South", "West", "North", "East"};
-    protected static final String[] FINEDIRECTION = {
-        "South", "South West", "West", "North West", "North", "North East", "East", "South East"
-    };
-    protected static final String[] ABRROUGHDIRECTION = {"S", "W", "N", "E"};
-    protected static final String[] ABRFINEDIRECTION = {"S", "SW", "W", "NW", "N", "NE", "E", "SE"};
+    protected static final String[] ROUGHDIRECTION = { "South", "West", "North", "East" };
+    protected static final String[] FINEDIRECTION = { "South", "South West", "West", "North West", "North",
+            "North East", "East", "South East" };
+    protected static final String[] ABRROUGHDIRECTION = { "S", "W", "N", "E" };
+    protected static final String[] ABRFINEDIRECTION = { "S", "SW", "W", "NW", "N", "NE", "E", "SE" };
 
     @Override
     public String getCategory() {
@@ -20,6 +22,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class ChunkX extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.valueOf(playerPosition.x >> 4);
@@ -27,6 +30,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class ChunkZ extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.valueOf(playerPosition.z >> 4);
@@ -34,6 +38,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class ChunkOffsetX extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.valueOf(playerPosition.x & 0x0F);
@@ -41,6 +46,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class ChunkOffsetZ extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.valueOf(playerPosition.z & 0x0F);
@@ -48,6 +54,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class X extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.2f", player.posX);
@@ -55,6 +62,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class Y extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.2f", player.posY);
@@ -62,6 +70,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class YFeet extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.2f", player.boundingBox.minY);
@@ -69,6 +78,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class Z extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.2f", player.posZ);
@@ -76,6 +86,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class Xi extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.valueOf(playerPosition.x);
@@ -83,6 +94,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class Yi extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.valueOf(playerPosition.y);
@@ -90,6 +102,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class YFeeti extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.valueOf((int) Math.floor(player.boundingBox.minY));
@@ -97,6 +110,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class Zi extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.valueOf(playerPosition.z);
@@ -104,19 +118,20 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class Speed extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(
                     Locale.ENGLISH,
                     "%.3f",
-                    TICKS
-                            * Math.sqrt(playerMotion.x * playerMotion.x
-                                    + playerMotion.y * playerMotion.y
+                    TICKS * Math.sqrt(
+                            playerMotion.x * playerMotion.x + playerMotion.y * playerMotion.y
                                     + playerMotion.z * playerMotion.z));
         }
     }
 
     public static class SpeedX extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.3f", TICKS * Math.abs(playerMotion.x));
@@ -124,6 +139,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class SpeedY extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.3f", TICKS * Math.abs(playerMotion.y));
@@ -131,6 +147,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class SpeedZ extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.3f", TICKS * Math.abs(playerMotion.z));
@@ -138,6 +155,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class SpeedXZ extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return String.format(
@@ -148,6 +166,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class Direction extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             float direction = player.rotationYaw % 360;
@@ -161,6 +180,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class RoughDirection extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return ROUGHDIRECTION[MathHelper.floor_double(player.rotationYaw * 4.0 / 360.0 + 0.5) & 3];
@@ -168,6 +188,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class FineDirection extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return FINEDIRECTION[MathHelper.floor_double(player.rotationYaw * 8.0 / 360.0 + 0.5) & 7];
@@ -175,6 +196,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class AbbreviatedRoughDirection extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return ABRROUGHDIRECTION[MathHelper.floor_double(player.rotationYaw * 4.0 / 360.0 + 0.5) & 3];
@@ -182,6 +204,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class AbbreviatedFineDirection extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             return ABRFINEDIRECTION[MathHelper.floor_double(player.rotationYaw * 8.0 / 360.0 + 0.5) & 7];
@@ -189,6 +212,7 @@ public abstract class TagPlayerPosition extends Tag {
     }
 
     public static class DirectionHud extends TagPlayerPosition {
+
         @Override
         public String getValue() {
             int direction = MathHelper.floor_double(player.rotationYaw * 16.0f / 360.0f + 0.5) & 15;

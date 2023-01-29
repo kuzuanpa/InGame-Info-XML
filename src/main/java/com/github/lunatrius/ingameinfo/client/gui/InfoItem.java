@@ -6,12 +6,13 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class InfoItem extends Info {
-    private static final TextureManager textureManager =
-            Minecraft.getMinecraft().getTextureManager();
+
+    private static final TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
     private static final RenderItem renderItem = new RenderItem();
     private final ItemStack itemStack;
     private final FontRenderer fontRenderer;
@@ -76,7 +77,12 @@ public class InfoItem extends Info {
     public String toString() {
         return String.format(
                 "InfoItem{itemStack: %s, x: %d, y: %d, offsetX: %d, offsetY: %d, children: %s}",
-                this.itemStack, this.x, this.y, this.offsetX, this.offsetY, this.children);
+                this.itemStack,
+                this.x,
+                this.y,
+                this.offsetX,
+                this.offsetY,
+                this.children);
     }
 
     static {

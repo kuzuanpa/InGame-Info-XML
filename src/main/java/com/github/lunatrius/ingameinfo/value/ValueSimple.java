@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo.value;
 import com.github.lunatrius.ingameinfo.value.registry.ValueRegistry;
 
 public abstract class ValueSimple extends Value {
+
     @Override
     public Value setRawValue(String value, boolean isText) {
         this.value = value.replaceAll("\\$(?=[0-9a-fk-or])", "\u00a7");
@@ -32,6 +33,7 @@ public abstract class ValueSimple extends Value {
     }
 
     public static class ValueString extends ValueSimple {
+
         @Override
         public String getType() {
             if (this.value.matches("^-?\\d+(\\.\\d+)?$")) {
@@ -47,6 +49,7 @@ public abstract class ValueSimple extends Value {
     }
 
     public static class ValueNumber extends ValueSimple {
+
         @Override
         public String getValue() {
             return this.value;
@@ -54,6 +57,7 @@ public abstract class ValueSimple extends Value {
     }
 
     public static class ValueVariable extends ValueSimple {
+
         @Override
         public String getValue() {
             return getVariableValue(this.value);
@@ -61,6 +65,7 @@ public abstract class ValueSimple extends Value {
     }
 
     public static class ValueInvalid extends ValueComplex {
+
         @Override
         public boolean isValidSize() {
             return true;
@@ -79,8 +84,8 @@ public abstract class ValueSimple extends Value {
 
     public static void register() {
         ValueRegistry.INSTANCE.register(new ValueString().setName("str").setAliases("string"));
-        ValueRegistry.INSTANCE.register(
-                new ValueNumber().setName("num").setAliases("number", "int", "integer", "float", "double"));
+        ValueRegistry.INSTANCE
+                .register(new ValueNumber().setName("num").setAliases("number", "int", "integer", "float", "double"));
         ValueRegistry.INSTANCE.register(new ValueVariable().setName("var").setAliases("variable"));
         ValueRegistry.INSTANCE.register(new ValueInvalid().setName("invalid"));
     }

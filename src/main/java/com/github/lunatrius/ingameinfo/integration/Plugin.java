@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo.integration;
 import cpw.mods.fml.common.Loader;
 
 public abstract class Plugin {
+
     protected abstract String getDependency();
 
     public String getDependencyName() {

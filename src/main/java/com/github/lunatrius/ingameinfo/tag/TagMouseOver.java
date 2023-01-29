@@ -1,20 +1,23 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
-import cpw.mods.fml.common.registry.GameData;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+import cpw.mods.fml.common.registry.GameData;
+
 public abstract class TagMouseOver extends Tag {
+
     @Override
     public String getCategory() {
         return "mouseover";
     }
 
     public static class Name extends TagMouseOver {
+
         @Override
         public String getValue() {
             MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
@@ -22,8 +25,8 @@ public abstract class TagMouseOver extends Tag {
                 if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
                     return objectMouseOver.entityHit.func_145748_c_().getFormattedText();
                 } else if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                    Block block =
-                            world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
+                    Block block = world
+                            .getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
                     if (block != null) {
                         ItemStack pickBlock = block.getPickBlock(
                                 objectMouseOver,
@@ -43,6 +46,7 @@ public abstract class TagMouseOver extends Tag {
     }
 
     public static class UniqueName extends TagMouseOver {
+
         @Override
         public String getValue() {
             MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
@@ -53,8 +57,8 @@ public abstract class TagMouseOver extends Tag {
                         return name;
                     }
                 } else if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                    Block block =
-                            world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
+                    Block block = world
+                            .getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
                     if (block != null) {
                         return GameData.getBlockRegistry().getNameForObject(block);
                     }
@@ -65,6 +69,7 @@ public abstract class TagMouseOver extends Tag {
     }
 
     public static class Id extends TagMouseOver {
+
         @Override
         public String getValue() {
             MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
@@ -72,8 +77,8 @@ public abstract class TagMouseOver extends Tag {
                 if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY) {
                     return String.valueOf(objectMouseOver.entityHit.getEntityId());
                 } else if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                    Block block =
-                            world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
+                    Block block = world
+                            .getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
                     if (block != null) {
                         return String.valueOf(GameData.getBlockRegistry().getId(block));
                     }
@@ -84,13 +89,17 @@ public abstract class TagMouseOver extends Tag {
     }
 
     public static class Metadata extends TagMouseOver {
+
         @Override
         public String getValue() {
             MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
             if (objectMouseOver != null) {
                 if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                    return String.valueOf(world.getBlockMetadata(
-                            objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ));
+                    return String.valueOf(
+                            world.getBlockMetadata(
+                                    objectMouseOver.blockX,
+                                    objectMouseOver.blockY,
+                                    objectMouseOver.blockZ));
                 }
             }
             return "0";
@@ -98,6 +107,7 @@ public abstract class TagMouseOver extends Tag {
     }
 
     public static class PowerWeak extends TagMouseOver {
+
         @Override
         public String getValue() {
             MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
@@ -109,7 +119,8 @@ public abstract class TagMouseOver extends Tag {
                         final int y = objectMouseOver.blockY + side.offsetY;
                         final int z = objectMouseOver.blockZ + side.offsetZ;
                         power = Math.max(
-                                power, world.getBlock(x, y, z).isProvidingWeakPower(world, x, y, z, side.ordinal()));
+                                power,
+                                world.getBlock(x, y, z).isProvidingWeakPower(world, x, y, z, side.ordinal()));
 
                         if (power >= 15) {
                             break;
@@ -123,13 +134,14 @@ public abstract class TagMouseOver extends Tag {
     }
 
     public static class PowerStrong extends TagMouseOver {
+
         @Override
         public String getValue() {
             MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
             if (objectMouseOver != null) {
                 if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                    final Block block =
-                            world.getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
+                    final Block block = world
+                            .getBlock(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
                     int power = -1;
                     for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
                         power = Math.max(
@@ -153,13 +165,17 @@ public abstract class TagMouseOver extends Tag {
     }
 
     public static class PowerInput extends TagMouseOver {
+
         @Override
         public String getValue() {
             MovingObjectPosition objectMouseOver = minecraft.objectMouseOver;
             if (objectMouseOver != null) {
                 if (objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                    return String.valueOf(world.getBlockPowerInput(
-                            objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ));
+                    return String.valueOf(
+                            world.getBlockPowerInput(
+                                    objectMouseOver.blockX,
+                                    objectMouseOver.blockY,
+                                    objectMouseOver.blockZ));
                 }
             }
             return "-1";

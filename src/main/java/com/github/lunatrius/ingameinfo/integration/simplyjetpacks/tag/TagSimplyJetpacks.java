@@ -1,20 +1,25 @@
 package com.github.lunatrius.ingameinfo.integration.simplyjetpacks.tag;
 
-import cofh.api.energy.IEnergyContainerItem;
-import com.github.lunatrius.ingameinfo.tag.TagIntegration;
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import java.util.Locale;
+
 import net.minecraft.item.ItemStack;
+
 import tonius.simplyjetpacks.item.ItemPack;
 import tonius.simplyjetpacks.item.meta.Jetpack;
+import cofh.api.energy.IEnergyContainerItem;
+
+import com.github.lunatrius.ingameinfo.tag.TagIntegration;
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 
 public abstract class TagSimplyJetpacks extends TagIntegration {
+
     @Override
     public String getCategory() {
         return "simplyjetpacks";
     }
 
     public static class Energy extends TagSimplyJetpacks {
+
         @Override
         public String getValue() {
             try {
@@ -33,6 +38,7 @@ public abstract class TagSimplyJetpacks extends TagIntegration {
     }
 
     public static class MaxEnergy extends TagSimplyJetpacks {
+
         @Override
         public String getValue() {
             try {
@@ -51,6 +57,7 @@ public abstract class TagSimplyJetpacks extends TagIntegration {
     }
 
     public static class Percent extends TagSimplyJetpacks {
+
         @Override
         public String getValue() {
             try {
@@ -72,6 +79,7 @@ public abstract class TagSimplyJetpacks extends TagIntegration {
     }
 
     public static class Enabled extends TagSimplyJetpacks {
+
         @Override
         public String getValue() {
             try {
@@ -91,6 +99,7 @@ public abstract class TagSimplyJetpacks extends TagIntegration {
     }
 
     public static class Hover extends TagSimplyJetpacks {
+
         @Override
         public String getValue() {
             try {

@@ -6,6 +6,7 @@ import com.github.lunatrius.ingameinfo.reference.Names;
 
 @SuppressWarnings("UnusedDeclaration")
 public class SimplyJetpacks extends Plugin {
+
     @Override
     public String getDependency() {
         return Names.Mods.SIMPLYJETPACKS_MODID;

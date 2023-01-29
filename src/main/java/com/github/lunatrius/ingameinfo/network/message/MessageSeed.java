@@ -1,6 +1,7 @@
 package com.github.lunatrius.ingameinfo.network.message;
 
 import com.github.lunatrius.ingameinfo.tag.Tag;
+
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -8,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 
 public class MessageSeed implements IMessage, IMessageHandler<MessageSeed, IMessage> {
+
     public long seed;
 
     public MessageSeed() {

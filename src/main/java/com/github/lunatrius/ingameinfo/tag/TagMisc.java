@@ -1,13 +1,16 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.client.gui.InfoIcon;
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import java.util.List;
+
 import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.resources.ResourcePackRepository;
 import net.minecraft.util.EnumChatFormatting;
 
+import com.github.lunatrius.ingameinfo.client.gui.InfoIcon;
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+
 public abstract class TagMisc extends Tag {
+
     protected static final ResourcePackRepository resourcePackRepository = minecraft.getResourcePackRepository();
 
     @Override
@@ -16,6 +19,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class MemoryMaximum extends TagMisc {
+
         @Override
         public String getValue() {
             return String.valueOf(Runtime.getRuntime().maxMemory());
@@ -23,6 +27,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class MemoryTotal extends TagMisc {
+
         @Override
         public String getValue() {
             return String.valueOf(Runtime.getRuntime().totalMemory());
@@ -30,6 +35,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class MemoryFree extends TagMisc {
+
         @Override
         public String getValue() {
             return String.valueOf(Runtime.getRuntime().freeMemory());
@@ -37,14 +43,15 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class MemoryUsed extends TagMisc {
+
         @Override
         public String getValue() {
-            return String.valueOf(
-                    Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+            return String.valueOf(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
         }
     }
 
     public static class FPS extends TagMisc {
+
         @Override
         public String getValue() {
             return minecraft.debug.substring(0, minecraft.debug.indexOf(" fps"));
@@ -52,6 +59,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class ResourcePack extends TagMisc {
+
         @Override
         public String getValue() {
             List<ResourcePackRepository.Entry> repositoryEntries = resourcePackRepository.getRepositoryEntries();
@@ -63,6 +71,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class EntitiesRendered extends TagMisc {
+
         @Override
         public String getValue() {
             String str = minecraft.getEntityDebug();
@@ -71,6 +80,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class EntitiesTotal extends TagMisc {
+
         @Override
         public String getValue() {
             String str = minecraft.getEntityDebug();
@@ -79,6 +89,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class LoadedChunks extends TagMisc {
+
         @Override
         public String getValue() {
             return String.valueOf(world.getChunkProvider().getLoadedChunkCount());
@@ -86,6 +97,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class Server extends TagMisc {
+
         @Override
         public String getValue() {
             String str = player.sendQueue.getNetworkManager().getSocketAddress().toString();
@@ -102,6 +114,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class ServerName extends TagMisc {
+
         @Override
         public String getValue() {
             String str = player.sendQueue.getNetworkManager().getSocketAddress().toString();
@@ -116,6 +129,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class ServerIP extends TagMisc {
+
         @Override
         public String getValue() {
             String str = player.sendQueue.getNetworkManager().getSocketAddress().toString();
@@ -128,6 +142,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class ServerPort extends TagMisc {
+
         @Override
         public String getValue() {
             String str = player.sendQueue.getNetworkManager().getSocketAddress().toString();
@@ -140,6 +155,7 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class Ping extends TagMisc {
+
         @Override
         public String getValue() {
             List<GuiPlayerInfo> list = player.sendQueue.playerInfoList;
@@ -153,12 +169,12 @@ public abstract class TagMisc extends Tag {
     }
 
     public static class PingIcon extends TagMisc {
+
         @Override
         public String getValue() {
             List<GuiPlayerInfo> list = player.sendQueue.playerInfoList;
             for (GuiPlayerInfo playerInfo : list) {
-                if (player.getGameProfile()
-                        .getName()
+                if (player.getGameProfile().getName()
                         .equals(EnumChatFormatting.getTextWithoutFormattingCodes(playerInfo.name))) {
                     int pingIndex = 4;
                     if (playerInfo.responseTime < 0) {

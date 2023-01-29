@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo.parser.text;
 import java.util.Locale;
 
 public class Location {
+
     private int row;
     private int column;
 

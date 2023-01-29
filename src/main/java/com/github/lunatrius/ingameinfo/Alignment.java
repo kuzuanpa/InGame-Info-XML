@@ -1,6 +1,7 @@
 package com.github.lunatrius.ingameinfo;
 
 public enum Alignment {
+
     TOPLEFT(2, 2),
     TOPCENTER(0, 2),
     TOPRIGHT(-2, 2),
@@ -111,8 +112,7 @@ public enum Alignment {
                 this.x = x;
                 this.y = y;
             }
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
     }
 
     static {

@@ -8,6 +8,7 @@ import com.github.lunatrius.ingameinfo.reference.Names;
 // NOTE: requires VM arguments: -Dfml.coreMods.load=com.bioxx.tfc.TFCASMLoadingPlugin
 @SuppressWarnings("UnusedDeclaration")
 public class TerraFirmaCraft extends Plugin {
+
     @Override
     public String getDependency() {
         return Names.Mods.TERRAFIRMACRAFT_MODID;

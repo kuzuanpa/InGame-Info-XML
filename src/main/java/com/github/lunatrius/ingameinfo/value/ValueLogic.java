@@ -3,12 +3,14 @@ package com.github.lunatrius.ingameinfo.value;
 import com.github.lunatrius.ingameinfo.value.registry.ValueRegistry;
 
 public abstract class ValueLogic extends ValueComplex {
+
     @Override
     public boolean isValidSize() {
         return this.values.size() > 1;
     }
 
     public static class ValueIf extends ValueLogic {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() == 2 || this.values.size() == 3;
@@ -31,6 +33,7 @@ public abstract class ValueLogic extends ValueComplex {
     }
 
     public static class ValueNot extends ValueLogic {
+
         @Override
         public boolean isValidSize() {
             return this.values.size() == 1;
@@ -47,6 +50,7 @@ public abstract class ValueLogic extends ValueComplex {
     }
 
     public static class ValueAnd extends ValueLogic {
+
         @Override
         public String getValue() {
             try {
@@ -63,6 +67,7 @@ public abstract class ValueLogic extends ValueComplex {
     }
 
     public static class ValueOr extends ValueLogic {
+
         @Override
         public String getValue() {
             try {
@@ -79,6 +84,7 @@ public abstract class ValueLogic extends ValueComplex {
     }
 
     public static class ValueXor extends ValueLogic {
+
         @Override
         public String getValue() {
             try {
@@ -94,6 +100,7 @@ public abstract class ValueLogic extends ValueComplex {
     }
 
     public static class ValueGreater extends ValueLogic {
+
         @Override
         public String getValue() {
             try {
@@ -115,6 +122,7 @@ public abstract class ValueLogic extends ValueComplex {
     }
 
     public static class ValueLesser extends ValueLogic {
+
         @Override
         public String getValue() {
             try {
@@ -136,6 +144,7 @@ public abstract class ValueLogic extends ValueComplex {
     }
 
     public static class ValueEqual extends ValueLogic {
+
         @Override
         public String getValue() {
             try {
@@ -163,6 +172,7 @@ public abstract class ValueLogic extends ValueComplex {
     }
 
     public static class ValueContains extends ValueLogic {
+
         @Override
         public String getValue() {
             try {

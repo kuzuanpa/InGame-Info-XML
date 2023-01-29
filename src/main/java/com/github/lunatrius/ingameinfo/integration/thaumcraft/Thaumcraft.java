@@ -6,6 +6,7 @@ import com.github.lunatrius.ingameinfo.reference.Names;
 
 @SuppressWarnings("UnusedDeclaration")
 public class Thaumcraft extends Plugin {
+
     @Override
     public String getDependency() {
         return Names.Mods.THAUMCRAFT_MODID;

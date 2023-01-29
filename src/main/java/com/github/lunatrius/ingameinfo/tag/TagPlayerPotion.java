@@ -1,13 +1,16 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.client.gui.InfoIcon;
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import java.util.Collection;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
+import com.github.lunatrius.ingameinfo.client.gui.InfoIcon;
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+
 public abstract class TagPlayerPotion extends Tag {
+
     public static final int MAXIMUM_INDEX = Potion.potionTypes.length;
 
     protected static PotionEffect[] potionEffects = null;
@@ -62,6 +65,7 @@ public abstract class TagPlayerPotion extends Tag {
     }
 
     public static class Effect extends TagPlayerPotion {
+
         public Effect(int index) {
             super(index);
         }
@@ -89,6 +93,7 @@ public abstract class TagPlayerPotion extends Tag {
     }
 
     public static class Duration extends TagPlayerPotion {
+
         public Duration(int index) {
             super(index);
         }
@@ -104,6 +109,7 @@ public abstract class TagPlayerPotion extends Tag {
     }
 
     public static class DurationTicks extends TagPlayerPotion {
+
         public DurationTicks(int index) {
             super(index);
         }
@@ -119,6 +125,7 @@ public abstract class TagPlayerPotion extends Tag {
     }
 
     public static class Negative extends TagPlayerPotion {
+
         public Negative(int index) {
             super(index);
         }
@@ -135,6 +142,7 @@ public abstract class TagPlayerPotion extends Tag {
     }
 
     public static class Icon extends TagPlayerPotion {
+
         private final boolean large;
 
         public Icon(int index, boolean large) {

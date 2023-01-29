@@ -1,23 +1,27 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import java.util.Locale;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 
+import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+
 public abstract class TagPlayerGeneral extends Tag {
+
     @Override
     public String getCategory() {
         return "playergeneral";
     }
 
     public static class Light extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             try {
-                return String.valueOf(world.getChunkFromBlockCoords(playerPosition.x, playerPosition.z)
-                        .getBlockLightValue(
+                return String.valueOf(
+                        world.getChunkFromBlockCoords(playerPosition.x, playerPosition.z).getBlockLightValue(
                                 playerPosition.x & 15,
                                 playerPosition.y,
                                 playerPosition.z & 15,
@@ -29,11 +33,12 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class LightFeet extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             try {
-                return String.valueOf(world.getChunkFromBlockCoords(playerPosition.x, playerPosition.z)
-                        .getBlockLightValue(
+                return String.valueOf(
+                        world.getChunkFromBlockCoords(playerPosition.x, playerPosition.z).getBlockLightValue(
                                 playerPosition.x & 15,
                                 (int) Math.round(player.boundingBox.minY),
                                 playerPosition.z & 15,
@@ -45,11 +50,16 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class LightNoSun extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             try {
-                return String.valueOf(world.getSavedLightValue(
-                        EnumSkyBlock.Block, playerPosition.x, playerPosition.y, playerPosition.z));
+                return String.valueOf(
+                        world.getSavedLightValue(
+                                EnumSkyBlock.Block,
+                                playerPosition.x,
+                                playerPosition.y,
+                                playerPosition.z));
             } catch (Exception e) {
                 return "0";
             }
@@ -57,14 +67,16 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class LightNoSunFeet extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             try {
-                return String.valueOf(world.getSavedLightValue(
-                        EnumSkyBlock.Block,
-                        playerPosition.x,
-                        (int) Math.round(player.boundingBox.minY),
-                        playerPosition.z));
+                return String.valueOf(
+                        world.getSavedLightValue(
+                                EnumSkyBlock.Block,
+                                playerPosition.x,
+                                (int) Math.round(player.boundingBox.minY),
+                                playerPosition.z));
             } catch (Exception e) {
                 return "0";
             }
@@ -72,11 +84,12 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class LightSun extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             try {
-                final int lightValue = world.getSavedLightValue(
-                        EnumSkyBlock.Sky, playerPosition.x, playerPosition.y, playerPosition.z);
+                final int lightValue = world
+                        .getSavedLightValue(EnumSkyBlock.Sky, playerPosition.x, playerPosition.y, playerPosition.z);
                 final int subtract = world.calculateSkylightSubtracted(1.0f);
                 return String.valueOf(MathHelper.clamp_int(lightValue - subtract, 0, 15));
             } catch (Exception e) {
@@ -86,6 +99,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class LightSunFeet extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             try {
@@ -103,6 +117,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Score extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             try {
@@ -114,6 +129,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class GameMode extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return I18n.format("selectWorld.gameMode." + minecraft.playerController.currentGameType.getName());
@@ -121,6 +137,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class GameModeId extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(minecraft.playerController.currentGameType.getID());
@@ -128,6 +145,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Health extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.2f", player.getHealth());
@@ -135,6 +153,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class MaxHealth extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.2f", player.getMaxHealth());
@@ -142,6 +161,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Armor extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.getTotalArmorValue());
@@ -149,6 +169,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class FoodLevel extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.getFoodStats().getFoodLevel());
@@ -156,6 +177,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class MaxFoodLevel extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             // TODO: use Forge method when it's in
@@ -164,6 +186,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Saturation extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.2f", player.getFoodStats().getSaturationLevel());
@@ -171,6 +194,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Exhaustion extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.format(Locale.ENGLISH, "%.2f", player.getFoodStats().foodExhaustionLevel);
@@ -178,6 +202,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class AirTicks extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.getAir());
@@ -185,6 +210,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class MaxAirTicks extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(300);
@@ -192,6 +218,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class PlayerLevel extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.experienceLevel);
@@ -199,6 +226,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class CurrentExperience extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf((int) Math.ceil(player.experience * player.xpBarCap()));
@@ -206,6 +234,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class ExperienceUntilNext extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf((int) Math.floor((1.0 - player.experience) * player.xpBarCap()));
@@ -213,6 +242,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class ExperienceCap extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.xpBarCap());
@@ -220,6 +250,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Username extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return player.getGameProfile().getName();
@@ -227,6 +258,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class InWater extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isInWater());
@@ -234,6 +266,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Wet extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isWet());
@@ -241,6 +274,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Alive extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isEntityAlive());
@@ -248,6 +282,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Burning extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isBurning());
@@ -255,6 +290,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Riding extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isRiding());
@@ -262,6 +298,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Sneaking extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isSneaking());
@@ -269,6 +306,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Sprinting extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isSprinting());
@@ -276,6 +314,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Invisible extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isInvisible());
@@ -283,6 +322,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Eating extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isEating());
@@ -290,6 +330,7 @@ public abstract class TagPlayerGeneral extends Tag {
     }
 
     public static class Invulnerable extends TagPlayerGeneral {
+
         @Override
         public String getValue() {
             return String.valueOf(player.isEntityInvulnerable());

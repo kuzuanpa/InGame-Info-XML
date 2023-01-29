@@ -1,12 +1,5 @@
 package com.github.lunatrius.ingameinfo.parser.json;
 
-import com.github.lunatrius.ingameinfo.Alignment;
-import com.github.lunatrius.ingameinfo.parser.IParser;
-import com.github.lunatrius.ingameinfo.reference.Reference;
-import com.github.lunatrius.ingameinfo.value.Value;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +8,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.github.lunatrius.ingameinfo.Alignment;
+import com.github.lunatrius.ingameinfo.parser.IParser;
+import com.github.lunatrius.ingameinfo.reference.Reference;
+import com.github.lunatrius.ingameinfo.value.Value;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 public class JsonParser implements IParser {
+
     private JsonElement element;
 
     @Override

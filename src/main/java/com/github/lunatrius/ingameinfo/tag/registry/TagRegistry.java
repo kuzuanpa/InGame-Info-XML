@@ -1,5 +1,10 @@
 package com.github.lunatrius.ingameinfo.tag.registry;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;
 import com.github.lunatrius.ingameinfo.tag.TagFormatting;
@@ -13,12 +18,9 @@ import com.github.lunatrius.ingameinfo.tag.TagPlayerPotion;
 import com.github.lunatrius.ingameinfo.tag.TagRiding;
 import com.github.lunatrius.ingameinfo.tag.TagTime;
 import com.github.lunatrius.ingameinfo.tag.TagWorld;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class TagRegistry {
+
     public static final TagRegistry INSTANCE = new TagRegistry();
 
     private final Map<String, Tag> stringTagMap = new HashMap<>();

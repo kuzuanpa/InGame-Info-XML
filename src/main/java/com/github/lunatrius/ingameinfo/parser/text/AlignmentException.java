@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo.parser.text;
 import com.github.lunatrius.ingameinfo.Alignment;
 
 public class AlignmentException extends Exception {
+
     private final Alignment alignment;
     private final boolean valid;
 

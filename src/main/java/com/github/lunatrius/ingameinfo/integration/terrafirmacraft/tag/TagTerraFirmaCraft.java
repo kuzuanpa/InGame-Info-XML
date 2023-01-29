@@ -1,5 +1,9 @@
 package com.github.lunatrius.ingameinfo.integration.terrafirmacraft.tag;
 
+import java.util.Locale;
+
+import net.minecraft.client.resources.I18n;
+
 import com.bioxx.tfc.Core.Player.BodyTempStats;
 import com.bioxx.tfc.Core.Player.SkillStats;
 import com.bioxx.tfc.Core.TFC_Climate;
@@ -9,16 +13,16 @@ import com.bioxx.tfc.api.SkillsManager;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.TagIntegration;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
-import java.util.Locale;
-import net.minecraft.client.resources.I18n;
 
 public abstract class TagTerraFirmaCraft extends TagIntegration {
+
     @Override
     public String getCategory() {
         return "terrafirmacraft";
     }
 
     public static class Rainfall extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
@@ -32,6 +36,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class Temperature extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
@@ -47,14 +52,15 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class AverageTemperature extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
                 return String.format(
                         Locale.ENGLISH,
                         "%.2f",
-                        TFC_Climate.getBioTemperatureHeight(
-                                world, playerPosition.x, playerPosition.y, playerPosition.z));
+                        TFC_Climate
+                                .getBioTemperatureHeight(world, playerPosition.x, playerPosition.y, playerPosition.z));
             } catch (Throwable e) {
                 log(this, e);
             }
@@ -63,6 +69,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class TemperatureWithHeatSources extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
@@ -79,6 +86,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class Season extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
@@ -91,6 +99,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class Date extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
@@ -103,6 +112,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class Day extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
@@ -115,6 +125,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class Month extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
@@ -127,6 +138,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class Year extends TagTerraFirmaCraft {
+
         @Override
         public String getValue() {
             try {
@@ -139,6 +151,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class Skill extends TagTerraFirmaCraft {
+
         private final String skillName;
 
         public Skill(final String skillName) {
@@ -168,6 +181,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class SkillRank extends TagTerraFirmaCraft {
+
         private final String skillName;
 
         public SkillRank(final String skillName) {
@@ -177,9 +191,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
         @Override
         public String getValue() {
             try {
-                return TFC_Core.getSkillStats(player)
-                        .getSkillRank(this.skillName)
-                        .getLocalizedName();
+                return TFC_Core.getSkillStats(player).getSkillRank(this.skillName).getLocalizedName();
             } catch (Throwable e) {
                 log(this, e);
             }
@@ -193,6 +205,7 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
     }
 
     public static class SkillProgress extends TagTerraFirmaCraft {
+
         private final String skillName;
 
         public SkillProgress(final String skillName) {
@@ -203,7 +216,9 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
         public String getValue() {
             try {
                 return String.format(
-                        Locale.ENGLISH, "%.1f", TFC_Core.getSkillStats(player).getPercToNextRank(this.skillName) * 100);
+                        Locale.ENGLISH,
+                        "%.1f",
+                        TFC_Core.getSkillStats(player).getPercToNextRank(this.skillName) * 100);
             } catch (Throwable e) {
                 log(this, e);
             }
@@ -212,8 +227,8 @@ public abstract class TagTerraFirmaCraft extends TagIntegration {
 
         @Override
         public String getLocalizedDescription() {
-            return I18n.format(
-                    Reference.MODID.toLowerCase() + ".tag.fmtskillprogress.desc", I18n.format(this.skillName));
+            return I18n
+                    .format(Reference.MODID.toLowerCase() + ".tag.fmtskillprogress.desc", I18n.format(this.skillName));
         }
     }
 

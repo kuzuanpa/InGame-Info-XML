@@ -1,15 +1,18 @@
 package com.github.lunatrius.ingameinfo.value;
 
-import com.github.lunatrius.ingameinfo.value.registry.ValueRegistry;
 import java.util.Locale;
 
+import com.github.lunatrius.ingameinfo.value.registry.ValueRegistry;
+
 public abstract class ValueMath extends ValueComplex {
+
     @Override
     public boolean isValidSize() {
         return this.values.size() == 2;
     }
 
     public static class ValueAdd extends ValueMath {
+
         @Override
         public String getValue() {
             try {
@@ -29,6 +32,7 @@ public abstract class ValueMath extends ValueComplex {
     }
 
     public static class ValueSub extends ValueMath {
+
         @Override
         public String getValue() {
             try {
@@ -48,6 +52,7 @@ public abstract class ValueMath extends ValueComplex {
     }
 
     public static class ValueMul extends ValueMath {
+
         @Override
         public String getValue() {
             try {
@@ -67,6 +72,7 @@ public abstract class ValueMath extends ValueComplex {
     }
 
     public static class ValueDiv extends ValueMath {
+
         @Override
         public String getValue() {
             try {
@@ -80,6 +86,7 @@ public abstract class ValueMath extends ValueComplex {
     }
 
     public static class ValueRound extends ValueMath {
+
         @Override
         public String getValue() {
             try {
@@ -97,6 +104,7 @@ public abstract class ValueMath extends ValueComplex {
     }
 
     public static class ValueMod extends ValueMath {
+
         @Override
         public String getValue() {
             try {
@@ -110,6 +118,7 @@ public abstract class ValueMath extends ValueComplex {
     }
 
     public static class ValueModi extends ValueMath {
+
         @Override
         public String getValue() {
             try {
@@ -123,6 +132,7 @@ public abstract class ValueMath extends ValueComplex {
     }
 
     public static class ValuePercent extends ValueMath {
+
         @Override
         public String getValue() {
             try {

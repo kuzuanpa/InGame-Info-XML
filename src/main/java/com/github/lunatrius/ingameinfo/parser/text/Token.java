@@ -5,7 +5,9 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class Token {
+
     public enum TokenType {
+
         EOF("$"),
         FUNC_HEAD("<"),
         FUNC_TAIL(">"),
