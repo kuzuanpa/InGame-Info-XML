@@ -1,16 +1,17 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.github.lunatrius.core.util.vector.Vector3f;
 import com.github.lunatrius.core.util.vector.Vector3i;
 import com.github.lunatrius.ingameinfo.client.gui.Info;
+import com.github.lunatrius.ingameinfo.client.gui.InfoText;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 
 public abstract class Tag {
@@ -21,7 +22,6 @@ public abstract class Tag {
     protected static MinecraftServer server;
     protected static World world;
     protected static EntityClientPlayerMP player;
-    protected static List<Info> info;
     protected static boolean hasSeed = false;
     protected static long seed = 0;
     protected static boolean hasNextRainTime = false;
@@ -76,6 +76,10 @@ public abstract class Tag {
 
     public abstract String getValue();
 
+    public @NotNull String getValue(@NotNull InfoText caller) {
+        return "";
+    }
+
     public static void setServer(MinecraftServer server) {
         Tag.server = server;
 
@@ -106,12 +110,9 @@ public abstract class Tag {
         Tag.nextRainTime = 0;
     }
 
-    public static void setWorld(World world) {
-        Tag.world = world;
-    }
-
-    public static void setPlayer(EntityClientPlayerMP player) {
-        Tag.player = player;
+    public static void update() {
+        world = minecraft.theWorld;
+        player = minecraft.thePlayer;
 
         if (player != null) {
             playerPosition
@@ -123,13 +124,7 @@ public abstract class Tag {
         }
     }
 
-    public static void setInfo(List<Info> info) {
-        Tag.info = info;
-    }
-
     public static void releaseResources() {
-        setWorld(null);
-        setPlayer(null);
         TagNearbyPlayer.releaseResources();
         TagPlayerPotion.releaseResources();
     }
