@@ -265,7 +265,7 @@ public abstract class ValueComplex extends Value {
 
                 Info value = parent.getAttachedValue(getName());
                 if (value != null && value.getIdentifier().equals(what)) {
-                    return "";
+                    return value.getIconSpacing();
                 }
 
                 if ((size == 1 || size == 2) && !what.endsWith(".png")) {
@@ -286,13 +286,25 @@ public abstract class ValueComplex extends Value {
 
                     if (itemStack.getItem() == null) return "";
 
-                    InfoItem item = new InfoItem(itemStack);
-                    item.setIdentifier(what);
-                    parent.attachValue(getName(), item);
-                    return Tag.getIconTag(item);
+                    if (value == null) {
+                        InfoItem item = new InfoItem(itemStack);
+                        item.setIdentifier(what);
+                        parent.attachValue(getName(), item);
+                        return Tag.getIconTag(item);
+                    } else {
+                        value.setIdentifier(what);
+                        value.setValue(itemStack);
+                        return value.getIconSpacing();
+                    }
                 }
 
-                InfoIcon icon = new InfoIcon(what);
+                InfoIcon icon;
+                if (value == null) {
+                    icon = new InfoIcon(what);
+                } else {
+                    icon = (InfoIcon) value;
+                }
+
                 icon.setIdentifier(what);
                 int index = 0;
 
@@ -314,8 +326,13 @@ public abstract class ValueComplex extends Value {
                     icon.setTextureData(iconX, iconY, iconWidth, iconHeight, textureWidth, textureHeight);
                 }
 
-                parent.attachValue(getName(), icon);
-                return Tag.getIconTag(icon);
+                if (value == null) {
+                    parent.attachValue(getName(), icon);
+                    return Tag.getIconTag(icon);
+                } else {
+                    value.setValue(what);
+                    return value.getIconSpacing();
+                }
             } catch (Exception e) {
                 return "?";
             }
