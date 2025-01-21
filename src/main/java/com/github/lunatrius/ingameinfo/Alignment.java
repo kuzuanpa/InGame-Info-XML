@@ -74,22 +74,25 @@ public enum Alignment {
     }
 
     public int getX(int screenwidth, int textwidth) {
-        return switch (this.alignment & MASK_X) {
-            case LEFT -> this.x;
-            case CENTER -> this.x + (screenwidth - textwidth) / 2;
-            case RIGHT -> this.x + screenwidth - textwidth;
-            default -> 0;
-        };
-
+        switch (this.alignment & MASK_X) {
+            case LEFT :return this.x;
+            case CENTER :return this.x + (screenwidth - textwidth) / 2;
+            case RIGHT :return this.x + screenwidth - textwidth;
+            default :return 0;
+        }
     }
 
     public int getY(int screenheight, int textheight) {
-        return switch (this.alignment & MASK_Y) {
-            case TOP -> this.y + textheight;
-            case MIDDLE -> this.y + textheight + screenheight / 2;
-            case BOTTOM -> this.y + screenheight - textheight;
-            default -> 0;
-        };
+        switch (this.alignment & MASK_Y) {
+            case TOP:
+                return this.y + textheight;
+            case MIDDLE:
+                return this.y + textheight + screenheight / 2;
+            case BOTTOM:
+                return this.y + screenheight - textheight;
+            default:
+                return 0;
+        }
 
     }
 

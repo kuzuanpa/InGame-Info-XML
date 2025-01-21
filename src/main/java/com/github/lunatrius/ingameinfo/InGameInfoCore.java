@@ -13,7 +13,10 @@ import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.IResource;
+import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.util.ResourceLocation;
 
@@ -110,34 +113,97 @@ public class InGameInfoCore {
         baseConfigFileName = null;
         return false;
     }
+    public long lastDataUpdateTime = 0;
+    public long lastRendUpdateTime = 0;
+    public final static long UpdateInterval = 1000;
+
+    public boolean isDataUpdateNeeded(){
+        return System.currentTimeMillis() - lastDataUpdateTime >= UpdateInterval;
+    }
+
+    public boolean isRendUpdateNeeded(){
+        return System.currentTimeMillis() - lastRendUpdateTime >= UpdateInterval;
+    }
 
     public void onTickClient() {
         float scale = ClientConfigurationHandler.Scale / 10;
         scaledWidth = (int) (scaledResolution.getScaledWidth() / scale);
         scaledHeight = (int) (scaledResolution.getScaledHeight() / scale);
-        Tag.update();
+        if(isDataUpdateNeeded()) {
+            lastDataUpdateTime = System.currentTimeMillis();
+            Tag.update();
 
-        if (needsRefresh) {
-            refreshInfoTexts();
-            needsRefresh = false;
-        }
+            if (needsRefresh) {
+                refreshInfoTexts();
+                needsRefresh = false;
+            }
 
-        for (Alignment alignment : Alignment.VALUES) {
-            int lastActiveIndex = 0;
-            for (InfoText infoText : alignment.getLines()) {
-                infoText.update(lastActiveIndex);
-                if (infoText.isActive()) {
-                    lastActiveIndex++;
+            for (Alignment alignment : Alignment.VALUES) {
+                int lastActiveIndex = 0;
+                for (InfoText infoText : alignment.getLines()) {
+                    infoText.update(lastActiveIndex);
+                    if (infoText.isActive()) {
+                        lastActiveIndex++;
+                    }
                 }
             }
-        }
 
-        Tag.releaseResources();
-        ValueComplex.ValueFile.tick();
+            Tag.releaseResources();
+            ValueComplex.ValueFile.tick();
+        }
     }
 
-    public void onTickRender(ScaledResolution resolution) {
-        scaledResolution = resolution;
+    protected Framebuffer fbo ;
+
+    public void drawToFBO(int screenWidth, int screenHeight) {
+        GL11.glPushMatrix();
+        fbo.bindFramebuffer(false);
+        GL11.glViewport(0,0,screenWidth,screenHeight);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glColor4f(1,1,1,1);
+
+        doActuallyRender();
+
+        fbo.unbindFramebuffer();
+        GL11.glPopMatrix();
+
+        Minecraft.getMinecraft().getFramebuffer().bindFramebuffer(true);
+    }
+
+    public void drawFBOToScreen(Minecraft mc){
+        ScaledResolution scaledResolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+
+        int screenWidth = Minecraft.getMinecraft().displayWidth;
+        int screenHeight = Minecraft.getMinecraft().displayHeight;
+        GL11.glPushMatrix();
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(false);
+        GL11.glViewport(0,0,screenWidth,screenHeight);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+        GL11.glColor4f(1,1,1,1);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.fbo.framebufferTexture);
+        int w = scaledResolution.getScaledWidth();
+        int h = scaledResolution.getScaledHeight();
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(0.0D,  h, 0.0D, 0.0D, 0.0D);
+        tessellator.addVertexWithUV( w,  h, 0.0D, 1, 0.0D);
+        tessellator.addVertexWithUV( w, 0.0D, 0.0D, 1, 1);
+        tessellator.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.0D, 1);
+        tessellator.draw();
+
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_COLOR_MATERIAL);
+        GL11.glDepthMask(true);
+        GL11.glPopMatrix();
+    }
+
+    public void doActuallyRender() {
         GL11.glPushMatrix();
         float scale = ClientConfigurationHandler.Scale / 10;
         GL11.glScalef(scale, scale, scale);
@@ -147,6 +213,27 @@ public class InGameInfoCore {
             }
         }
         GL11.glPopMatrix();
+    }
+
+    public void onTickRender(ScaledResolution resolution) {
+        if(!OpenGlHelper.isFramebufferEnabled()){
+            scaledResolution=resolution;
+            doActuallyRender();
+            return;
+        }
+        boolean fboChanged = false;
+        if(fbo==null) {
+            this.fbo = new Framebuffer(Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight,false);
+            fboChanged=true;
+        }
+        if(scaledResolution != resolution) {
+            fbo.deleteFramebuffer();
+            fbo = new Framebuffer(Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight,false);
+            fboChanged=true;
+            scaledResolution=resolution;
+        }
+        if(isRendUpdateNeeded()||fboChanged) drawToFBO(Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+        drawFBOToScreen(Minecraft.getMinecraft());
     }
 
     public boolean loadConfig(String filename) {

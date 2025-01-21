@@ -1,9 +1,9 @@
 [{
-	"modid": "${modId}",
-	"name": "${modName}",
+	"modid": "InGameInfoXML",
+	"name": "InGame Info XML",
 	"description": "Display extra information on top of your ingame screen.",
-	"version": "${modVersion}",
-	"mcversion": "${minecraftVersion}",
+	"version": "${version}",
+	"mcversion": "${mcversion}",
 	"authorList": ["Lunatrius"],
 	"credits": "DaftPVF, bspkrs",
 	"dependants": [  ],

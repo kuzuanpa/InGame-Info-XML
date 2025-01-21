@@ -67,8 +67,8 @@ public class InfoItem extends Info {
 
     @Override
     public void setValue(@NotNull Object value) {
-        if (!(value instanceof ItemStack stack)) return;
-        this.itemStack = stack;
+        if (!(value instanceof ItemStack)) return;
+        this.itemStack = (ItemStack)value;
     }
 
     @Override

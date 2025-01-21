@@ -19,6 +19,6 @@ public class SimplyJetpacks extends Plugin {
 
     @Override
     public void load() {
-        TagSimplyJetpacks.register();
+        //TagSimplyJetpacks.register();
     }
 }
